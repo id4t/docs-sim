@@ -1,6 +1,6 @@
 # Isolasi Database per Faskes
 
-**Status:** keputusan arsitektur diterima; implementasi belum dimulai.
+**Status:** keputusan arsitektur diterima; fondasi katalog dan audit migrasi sedang berjalan, isolasi runtime belum aktif.
 
 Dokumen ini adalah kontrak utama untuk Facility context, kepemilikan data, koneksi database, queue, logging, performa, migrasi, dan backup per Faskes. Proses penambahan Faskes dijelaskan lebih rinci di [`facility-provisioning.md`](./facility-provisioning.md).
 
@@ -122,6 +122,23 @@ Audit awal menemukan 475 direktori modul, 489 model, dan 538 migrasi. Hampir sem
 | Pembatalan, Penjualan, lainnya | 25 | Umumnya Faskes; wajib dicatat pada ledger klasifikasi sebelum migrasi |
 
 Jumlah tersebut adalah inventaris awal, bukan status implementasi. Ledger tabel `control | facility | review` harus diselesaikan sebelum tabel dipindahkan.
+
+### Hasil audit migrasi 28 Agustus 2026
+
+Validator `php artisan facility:schema-plan` telah mengklasifikasikan 24 modul control dan 451 modul facility, mencakup 542 migration termasuk migration root. Tidak ada modul existing yang belum mempunyai owner.
+
+Provisioning masih diblokir dengan sengaja karena migration operasional mempunyai foreign key ke tabel control:
+
+| Tabel control | Migration operasional terdampak |
+|---|---:|
+| `users` | 106 |
+| `genders` | 4 |
+| `professions`, `religions`, `blood_types` | masing-masing 2 |
+| `countries`, `educations`, `ethnicities`, `languages`, `marital_statuses`, `occupations` | masing-masing 1 |
+
+Angka dihitung per file migration dan akan berubah saat dependency dipindahkan. Command wajib tetap gagal sampai seluruh foreign key lintas boundary dihilangkan. Detail implementasi berada di [`../../RME-Backend/docs/architecture/facility-database-migration.md`](../../RME-Backend/docs/architecture/facility-database-migration.md).
+
+Vertical slice `diagnosis_codes` selesai pada 28 Agustus 2026: model dan validasi dapat memakai koneksi control, query penutupan episode tidak lagi melakukan join lintas database, serta lima FK operasional dilepas tanpa mengubah ID diagnosis existing. Mode satu database tetap menjadi default sampai `CONTROL_DB_CONNECTION=control` diaktifkan saat rollout dua database.
 
 ## Routing dan Facility context
 
@@ -260,8 +277,8 @@ Cara mencapainya sebelum menambah cache/infra:
 
 ## Urutan implementasi
 
-1. Selesaikan ledger kepemilikan tabel.
-2. Tambahkan katalog Faskes, relasi PPK, dan Membership di control DB.
+1. Selesaikan ledger kepemilikan tabel dan hilangkan dependency lintas boundary; validator ownership modul sudah tersedia, foreign key lintas database masih menjadi blocker.
+2. Tambahkan katalog Faskes, relasi PPK, dan Membership di control DB; katalog/draft Faskes sudah tersedia, Membership belum.
 3. Implementasikan provisioning CLI sesuai [`facility-provisioning.md`](./facility-provisioning.md).
 4. Implementasikan resolver HTTP, job middleware, dan cleanup context.
 5. Tambahkan log context serta scoping cache/storage/sequence.
