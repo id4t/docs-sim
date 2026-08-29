@@ -27,11 +27,11 @@ Setiap Faskes mempunyai sendiri:
 
 - pasien lokal dan Nomor Rekam Medis;
 - Pendaftaran, Kunjungan, rekam medis, Tagihan, Pembayaran, dan Episode Klaim;
-- pegawai, membership, role, Ruangan, tarif, stok, rekening, dan sequence dokumen;
+- pegawai, Membership, role, Unit Layanan, tarif, stok, rekening, dan sequence dokumen;
 - kode BPJS/Kemenkes, Organization/Location SATUSEHAT, endpoint, credential, serta scheduler;
 - audit trail dan kebijakan retensi.
 
-Request wajib mempunyai facility context yang berasal dari route lalu divalidasi terhadap Membership, bukan `facility_id` bebas dari payload atau satu pilihan global di session. Semua query dan job harus berjalan dalam scope Faskes. Tes isolasi wajib membuktikan identitas dari Faskes A tidak dapat membaca atau menulis data Faskes B.
+Request wajib mempunyai facility context yang berasal dari route lalu divalidasi terhadap Membership atau pengecualian aktor global yang eksplisit, bukan `facility_id` bebas dari payload atau satu pilihan global di session. Semua query dan job harus berjalan dalam scope Faskes. Tes isolasi wajib membuktikan identitas dari Faskes A tidak dapat membaca atau menulis data Faskes B. Detail kewenangan berada di [`implementation/membership-access.md`](./implementation/membership-access.md).
 
 Faskes baru dibuat sebagai draft oleh Admin Grup. Operator menjalankan provisioning database dan migrasi lewat CLI; runtime web tidak memiliki privilege `CREATE DATABASE`. Kontrak lengkap berada di [`implementation/multi-schema-facility.md`](./implementation/multi-schema-facility.md) dan [`implementation/facility-provisioning.md`](./implementation/facility-provisioning.md).
 
@@ -39,7 +39,7 @@ Master Patient Index lintas Faskes adalah capability terpisah pada fase lanjutan
 
 ## Bounded contexts
 
-- **Identity & Facility:** Grup, Faskes, membership, role, Ruangan, credential, capability profile.
+- **Identity & Facility:** Grup, Faskes, Membership, role, Unit Layanan, credential, capability profile.
 - **Patient Administration:** pasien lokal, Pendaftaran, antrean, rujukan, Coverage, SEP.
 - **Clinical Encounter:** Kunjungan, Encounter, asesmen, diagnosis, tindakan, order, hasil, resep, resume, finalisasi.
 - **Pharmacy & Inventory:** katalog, stok, dispensing, retur, pergerakan barang.

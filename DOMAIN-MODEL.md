@@ -5,7 +5,7 @@ Glosarium kanonik berada di [`../CONTEXT.md`](../CONTEXT.md). Dokumen ini menjel
 ## Model organisasi
 
 ```text
-Grup 1 ── * Faskes 1 ── * Ruangan
+Grup 1 ── * Faskes 1 ── * Unit Layanan
                     ├── 1 PPK internal
                     ├── 1 database operasional
                     └── * Membership * ── 1 User
@@ -13,8 +13,9 @@ Grup 1 ── * Faskes 1 ── * Ruangan
 
 - Satu deployment hanya melayani satu Grup.
 - Semua aggregate operasional dimiliki tepat satu Faskes.
-- User berada pada level Grup; kewenangan operasionalnya selalu berasal dari Membership pada Faskes terkait.
-- Membership menghubungkan User dengan Faskes, role/profesi, status, masa aktif, dan Ruangan yang diizinkan.
+- User berada pada level Grup; kewenangan operasionalnya berasal dari Membership pada Faskes terkait, kecuali Developer dan Superadmin sebagai aktor global yang diaudit khusus.
+- Membership menghubungkan User dengan Faskes, status, masa aktif, serta satu atau beberapa role dengan cakupan Unit Layanan masing-masing.
+- Unit Layanan adalah lokasi/unit kerja operasional (`Ward`), bukan `Room` kamar fisik atau `Bed`; kontrak lengkap berada di [`implementation/membership-access.md`](./implementation/membership-access.md).
 - Setiap Faskes menunjuk tepat satu PPK internal sebagai sumber identitas bisnis. Satu PPK internal tidak boleh dipakai dua Faskes aktif dalam Grup yang sama.
 - PPK lain dapat merepresentasikan fasilitas eksternal/rujukan tanpa menjadi Faskes; PPK bukan isolation boundary.
 - Setiap Faskes memiliki tepat satu database operasional. ID lokal hanya bermakna dalam scope Faskes tersebut.

@@ -37,6 +37,7 @@ Dokumen workflow mencantumkan tautan baseline atau kontrak yang relevan. ADR men
 - [`implementation/ppk.md`](./implementation/ppk.md): kontrak Master PPK, referensi SIMPel, acceptance, dan urutan implementasi.
 - [`implementation/general-reference.md`](./implementation/general-reference.md): katalog referensi bersama, ownership, seed, API, dan konsolidasi tabel duplikat.
 - [`implementation/demo-accounts.md`](./implementation/demo-accounts.md): akun lokal per role, kata sandi awal, dan aturan keamanan bootstrap.
+- [`implementation/membership-access.md`](./implementation/membership-access.md): lapisan kewenangan Faskes–role–Unit Layanan, lifecycle Membership, pemilihan konteks, dan Monitoring Global.
 - [`implementation/multi-schema-facility.md`](./implementation/multi-schema-facility.md): keputusan database-per-Faskes, Facility context, ownership data, performa, migrasi, dan acceptance.
 - [`implementation/facility-provisioning.md`](./implementation/facility-provisioning.md): kontrak draft UI, provisioning/retry CLI, keamanan, status, dan aktivasi Faskes.
 - [`workflows/rawat-jalan-bpjs.md`](./workflows/rawat-jalan-bpjs.md): journey operasional pertama beserta failure path.

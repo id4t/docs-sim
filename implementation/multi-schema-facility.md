@@ -165,7 +165,7 @@ route code
 
 Aturan wajib:
 
-1. `facility_code` hanya selector. Otorisasi selalu berasal dari Membership.
+1. `facility_code` hanya selector. Otorisasi berasal dari Membership atau pengecualian Developer/Superadmin yang eksplisit dan diaudit.
 2. Nama database berasal dari record allowlist, bukan payload atau string route langsung.
 3. Request tanpa context valid harus berhenti; dilarang fallback ke database default.
 4. Model control-plane selalu memakai koneksi control yang eksplisit.
@@ -178,11 +178,11 @@ Aturan wajib:
 Satu User dapat mempunyai Membership berbeda pada beberapa Faskes. Membership minimum menyimpan:
 
 - `user_id` dan `facility_id`;
-- role dan profesi pada Faskes tersebut;
+- satu atau beberapa role dan profesi pada Faskes tersebut;
 - status dan masa aktif;
-- daftar/cakupan Ruangan yang diizinkan.
+- cakupan Unit Layanan per role.
 
-Role global tidak boleh dipakai untuk memberi akses operasional. Admin Grup hanya mengelola control-plane; akses data klinis tetap membutuhkan Membership yang sesuai.
+Role operasional biasa selalu membutuhkan Membership yang sesuai. Developer dan Superadmin adalah pengecualian global yang diterima: keduanya tetap memakai satu Facility context saat membuka workspace operasional dan akses sensitifnya diaudit khusus. Kontrak role, Unit Layanan, lifecycle, serta Monitoring Global berada di [`membership-access.md`](./membership-access.md).
 
 ## Queue, scheduler, cache, dan storage
 
@@ -258,7 +258,7 @@ Cara mencapainya sebelum menambah cache/infra:
 |---|---|
 | Database Faskes A mati | Request/job A gagal dengan kode stabil; Faskes B tetap berjalan. |
 | Facility context hilang | Tolak sebelum query; jangan fallback. |
-| User memalsukan code/ID Faskes | Tolak berdasarkan Membership. |
+| User memalsukan code/ID Faskes | Tolak berdasarkan Membership atau pengecualian aktor global yang eksplisit. |
 | Job lama berjalan setelah suspend | Berhenti sebelum koneksi operasional dibuka. |
 | Migrasi satu Faskes gagal | Tandai Faskes itu gagal; database lain tidak di-rollback. |
 | Worker selesai A lalu mengambil B | Bersihkan A dan resolve B dari awal. |
@@ -294,7 +294,7 @@ Stop condition fase pertama: dua Faskes canary lulus isolasi, failure isolation,
 - Request/job berurutan A lalu B pada proses sama tidak membawa context A.
 - HTTP, queue, scheduler, cache, storage, sequence, audit, dan integrasi resolve ke Faskes yang sama.
 - Satu database Faskes yang mati tidak mematikan Faskes lain.
-- Admin tanpa Membership klinis tidak dapat membaca data operasional.
+- User biasa tanpa Membership klinis tidak dapat membaca data operasional; Developer/Superadmin mengikuti pengecualian global yang diaudit.
 - Error dapat difilter melalui `facility_id` dan ditelusuri dengan `request_id`/`job_id`.
 - Migrasi dan provisioning melaporkan checkpoint/kegagalan per Faskes.
 - Backup satu Faskes berhasil direstore pada environment uji.

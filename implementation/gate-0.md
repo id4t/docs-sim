@@ -18,7 +18,7 @@ Catatan: perubahan status/hasil order lab dan radiologi belum diblok setelah fin
 
 ## 2. Authorization
 
-- [ ] Definisikan membership User–Faskes–Ruangan dan profesi.
+- [x] Definisikan Membership User–Faskes–role–Unit Layanan dan profesi sesuai [`membership-access.md`](./membership-access.md).
 - [ ] Tambahkan policy untuk admit, record, verify, finalize, amend, bill, code, dan submit.
 - [ ] Hapus `authorize(): true` dari command sensitif.
 - [ ] Tambahkan matrix test role, Ruangan, assignment, dan cross-Faskes denial.
