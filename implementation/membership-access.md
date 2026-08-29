@@ -1,6 +1,6 @@
 # Membership Pengguna dan Akses Unit Layanan
 
-**Status:** pengelolaan Membership tahap pertama sudah diimplementasikan; enforcement Facility context dan Unit pada workflow operasional belum aktif.
+**Status:** pengelolaan Membership dan enforcement HTTP untuk vertical slice Rawat Jalan pertama sudah diimplementasikan; pergantian database per Faskes belum aktif.
 
 ## Bukti implementasi 29 Agustus 2026
 
@@ -12,13 +12,20 @@ Sudah tersedia:
 - penonaktifan User tanpa menghapus histori Membership;
 - UI tiga langkah Faskes → masa berlaku → role dan Unit Layanan;
 - penghapusan data User/Unit hardcoded pada halaman pengelolaan Membership.
+- resolver `/f/{facility_code}`, pemilih Faskes, dan daftar Unit dari API tepercaya;
+- validasi role per Faskes dan scope Unit pada registrasi, kunjungan, pencatatan klinis inti, penutupan episode, dan monitor SATUSEHAT;
+- query daftar Kunjungan discoped berdasarkan Unit sebelum pagination;
+- navigasi workspace disaring berdasarkan role Membership aktif.
 
 Belum termasuk tahap ini:
 
-- resolver `/f/{facility_code}` dan pemilih Faskes setelah login;
-- enforcement role-per-Unit pada endpoint workflow Rawat Jalan;
-- penggantian fallback Ruangan pada session frontend lama;
+- pergantian koneksi database per Faskes untuk membuktikan isolasi data fisik;
+- konteks Faskes pada queue, scheduler, cache, storage, dan sequence;
+- perluasan enforcement ke modul operasional di luar slice pertama;
+- record level pasien yang belum mempunyai provenance Kunjungan, termasuk alergi;
 - Monitoring Global lintas Faskes.
+
+Catatan transisi: route Facility sekarang membuktikan Membership, role, dan Unit, tetapi belum menjadi bukti isolasi data lintas Faskes sampai resolver juga memilih database Faskes. Endpoint tanpa provenance Unit tidak dipaksa masuk ke policy Kunjungan karena hasilnya akan memberi rasa aman palsu.
 
 Dokumen ini menetapkan lapisan kewenangan User pada deployment satu Grup yang memiliki banyak Faskes. Kontrak database dan Facility context tetap mengikuti [`multi-schema-facility.md`](./multi-schema-facility.md).
 
@@ -247,9 +254,9 @@ Penyimpanan/proyeksi Monitoring Global dirancang bersama outbox dan integration 
 
 ## Urutan implementasi
 
-1. Tambahkan model Membership dan role assignment pada control DB.
-2. Ganti mock/fallback akses Unit dengan API tepercaya.
-3. Terapkan Facility context dari route dan policy role-per-Unit pada satu vertical slice Rawat Jalan.
+1. [x] Tambahkan model Membership dan role assignment pada control DB.
+2. [x] Ganti mock/fallback akses Unit dengan API tepercaya.
+3. [x] Terapkan Facility context dari route dan policy role-per-Unit pada satu vertical slice Rawat Jalan.
 4. Tambahkan invalidasi akses pada request berikutnya dan audit dasar.
 5. Buktikan isolasi dua Faskes, dua role, dua Unit, serta dua tab.
 6. Perluas policy ke modul operasional lain setelah pola pertama lolos.

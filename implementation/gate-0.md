@@ -30,8 +30,8 @@ Catatan: perubahan status/hasil order lab dan radiologi belum diblok setelah fin
 - [x] Tambahkan validator ownership migration yang memblokir FK operasional menuju control DB.
 - [ ] Hilangkan dependency lintas database yang dilaporkan `facility:schema-plan`.
 - [ ] Implementasikan provisioning/retry CLI sesuai [`facility-provisioning.md`](./facility-provisioning.md).
-- [ ] Turunkan facility context dari route dan validasi Membership tepercaya; jangan memakai pilihan session global.
-- [ ] Scope HTTP, queue, scheduler, cache key, storage path, dan sequence.
+- [x] Turunkan facility context HTTP dari route dan validasi Membership tepercaya pada vertical slice Rawat Jalan pertama; jangan memakai pilihan session global.
+- [ ] Perluas scope HTTP ke seluruh modul serta scope queue, scheduler, cache key, storage path, dan sequence.
 - [ ] Tambahkan test dua Faskes yang membuktikan tidak ada cross-read/write.
 
 ## 4. Transaction safety
