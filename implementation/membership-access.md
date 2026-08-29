@@ -4,6 +4,8 @@
 
 ## Bukti implementasi 29 Agustus 2026
 
+Rekaman verifikasi UI tersedia di [`demo/facility-unit-workspace-demo.webm`](../demo/facility-unit-workspace-demo.webm). Rekaman memakai cursor dan caption langkah demi langkah pada data yang jelas berlabel demo.
+
 Sudah tersedia:
 
 - schema Membership, role assignment per Faskes, cakupan Unit per role, dan audit dasar;
