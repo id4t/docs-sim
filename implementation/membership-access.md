@@ -1,6 +1,24 @@
 # Membership Pengguna dan Akses Unit Layanan
 
-**Status:** keputusan produk diterima; implementasi belum dimulai.
+**Status:** pengelolaan Membership tahap pertama sudah diimplementasikan; enforcement Facility context dan Unit pada workflow operasional belum aktif.
+
+## Bukti implementasi 29 Agustus 2026
+
+Sudah tersedia:
+
+- schema Membership, role assignment per Faskes, cakupan Unit per role, dan audit dasar;
+- API daftar/simpan yang membatasi Admin Faskes ke Faskesnya sendiri;
+- validasi role facility/unit, Unit aktif, masa berlaku, dan Admin Faskes aktif terakhir;
+- penonaktifan User tanpa menghapus histori Membership;
+- UI tiga langkah Faskes → masa berlaku → role dan Unit Layanan;
+- penghapusan data User/Unit hardcoded pada halaman pengelolaan Membership.
+
+Belum termasuk tahap ini:
+
+- resolver `/f/{facility_code}` dan pemilih Faskes setelah login;
+- enforcement role-per-Unit pada endpoint workflow Rawat Jalan;
+- penggantian fallback Ruangan pada session frontend lama;
+- Monitoring Global lintas Faskes.
 
 Dokumen ini menetapkan lapisan kewenangan User pada deployment satu Grup yang memiliki banyak Faskes. Kontrak database dan Facility context tetap mengikuti [`multi-schema-facility.md`](./multi-schema-facility.md).
 
