@@ -27,7 +27,7 @@ Belum termasuk tahap ini:
 - record level pasien yang belum mempunyai provenance Kunjungan, termasuk alergi;
 - Monitoring Global lintas Faskes.
 
-Catatan transisi: route Facility sekarang membuktikan Membership, role, dan Unit, tetapi belum menjadi bukti isolasi data lintas Faskes sampai resolver juga memilih database Faskes. Endpoint tanpa provenance Unit tidak dipaksa masuk ke policy Kunjungan karena hasilnya akan memberi rasa aman palsu.
+Catatan transisi: resolver sudah dapat memilih database Faskes pada mode canary dan isolasi slice pertama telah dibuktikan. Mode tetap default mati sampai schema Faskes diprovision dengan aman. Endpoint tanpa provenance Unit tidak dipaksa masuk ke policy Kunjungan karena hasilnya akan memberi rasa aman palsu.
 
 Dokumen ini menetapkan lapisan kewenangan User pada deployment satu Grup yang memiliki banyak Faskes. Kontrak database dan Facility context tetap mengikuti [`multi-schema-facility.md`](./multi-schema-facility.md).
 

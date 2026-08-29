@@ -1,6 +1,6 @@
 # Isolasi Database per Faskes
 
-**Status:** keputusan arsitektur diterima; fondasi katalog dan audit migrasi sedang berjalan, isolasi runtime belum aktif.
+**Status:** keputusan arsitektur diterima; runtime switch opt-in untuk vertical slice Rawat Jalan sudah teruji, sedangkan provisioning schema penuh masih diblokir.
 
 Dokumen ini adalah kontrak utama untuk Facility context, kepemilikan data, koneksi database, queue, logging, performa, migrasi, dan backup per Faskes. Proses penambahan Faskes dijelaskan lebih rinci di [`facility-provisioning.md`](./facility-provisioning.md).
 
@@ -127,18 +127,27 @@ Jumlah tersebut adalah inventaris awal, bukan status implementasi. Ledger tabel 
 
 Validator `php artisan facility:schema-plan` telah mengklasifikasikan 24 modul control dan 451 modul facility, mencakup 542 migration termasuk migration root. Tidak ada modul existing yang belum mempunyai owner.
 
-Provisioning masih diblokir dengan sengaja karena migration operasional mempunyai foreign key ke tabel control:
+Provisioning masih diblokir dengan sengaja karena migration operasional mempunyai foreign key ke tabel control. Hasil terbaru 29 Agustus 2026:
 
 | Tabel control | Migration operasional terdampak |
 |---|---:|
 | `users` | 106 |
-| `genders` | 4 |
-| `professions`, `religions`, `blood_types` | masing-masing 2 |
-| `countries`, `educations`, `ethnicities`, `languages`, `marital_statuses`, `occupations` | masing-masing 1 |
+| `countries` | 1 |
 
 Angka dihitung per file migration dan akan berubah saat dependency dipindahkan. Command wajib tetap gagal sampai seluruh foreign key lintas boundary dihilangkan. Detail implementasi berada di [`../../RME-Backend/docs/architecture/facility-database-migration.md`](../../RME-Backend/docs/architecture/facility-database-migration.md).
 
 Vertical slice `diagnosis_codes` selesai pada 28 Agustus 2026: model dan validasi dapat memakai koneksi control, query penutupan episode tidak lagi melakukan join lintas database, serta lima FK operasional dilepas tanpa mengubah ID diagnosis existing. Mode satu database tetap menjadi default sampai `CONTROL_DB_CONNECTION=control` diaktifkan saat rollout dua database.
+
+### Bukti runtime vertical slice Rawat Jalan 29 Agustus 2026
+
+- runtime switch berada di `ResolveFacilityContext`, sesudah autentikasi/Membership dan sebelum implicit route binding;
+- database berasal dari `institutions.database_name` dan wajib lolos allowlist;
+- mode tetap opt-in melalui `FACILITY_DB_RUNTIME_ENABLED=false` secara default;
+- tes otomatis dua database membuktikan read, route binding, write isolation, dan cleanup koneksi;
+- canary MariaDB nyata membuktikan Faskes A dan B dapat mempunyai `visit.id = 1` dengan isi berbeda; write ke A menghasilkan hitungan `2`, sedangkan B tetap `1`;
+- dua database, record katalog, dan token canary sementara terverifikasi sudah dihapus setelah tes.
+
+Bukti ini menyelesaikan pola runtime untuk slice pertama, bukan membuka provisioning seluruh modul. `facility:schema-plan` tetap menjadi gate dan masih gagal karena 107 migration terdampak FK control.
 
 ## Routing dan Facility context
 
