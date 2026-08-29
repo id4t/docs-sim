@@ -1,8 +1,8 @@
 # Provisioning Faskes
 
-**Status:** kontrak diterima; command belum diimplementasikan.
+**Status:** kontrak diterima dan schema gate hijau; command belum diimplementasikan.
 
-Prasyarat implementasi command adalah `php artisan facility:schema-plan` berakhir sukses. Per 28 Agustus 2026 command tersebut masih menolak provisioning karena migration operasional memiliki foreign key ke tabel control; lihat [`multi-schema-facility.md`](./multi-schema-facility.md#hasil-audit-migrasi-28-agustus-2026).
+Prasyarat implementasi command adalah `php artisan facility:schema-plan` berakhir sukses. Prasyarat tersebut terpenuhi pada 29 Agustus 2026 setelah dependency foreign key lintas boundary dilepas; lihat [`multi-schema-facility.md`](./multi-schema-facility.md#hasil-audit-migrasi-29-agustus-2026).
 
 Dokumen ini menetapkan jalur penambahan Faskes yang jarang dilakukan: Admin Grup menyiapkan draft melalui UI, lalu operator menjalankan provisioning database melalui CLI. Jalur ini sengaja tidak memberi runtime web privilege untuk membuat database.
 

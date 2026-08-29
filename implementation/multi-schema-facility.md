@@ -1,6 +1,6 @@
 # Isolasi Database per Faskes
 
-**Status:** keputusan arsitektur diterima; runtime switch opt-in untuk vertical slice Rawat Jalan sudah teruji, sedangkan provisioning schema penuh masih diblokir.
+**Status:** keputusan arsitektur diterima; schema gate dan runtime switch opt-in untuk vertical slice Rawat Jalan sudah teruji, sedangkan command provisioning belum diimplementasikan.
 
 Dokumen ini adalah kontrak utama untuk Facility context, kepemilikan data, koneksi database, queue, logging, performa, migrasi, dan backup per Faskes. Proses penambahan Faskes dijelaskan lebih rinci di [`facility-provisioning.md`](./facility-provisioning.md).
 
@@ -123,16 +123,17 @@ Audit awal menemukan 475 direktori modul, 489 model, dan 538 migrasi. Hampir sem
 
 Jumlah tersebut adalah inventaris awal, bukan status implementasi. Ledger tabel `control | facility | review` harus diselesaikan sebelum tabel dipindahkan.
 
-### Hasil audit migrasi 28 Agustus 2026
+### Hasil audit migrasi 29 Agustus 2026
 
-Validator `php artisan facility:schema-plan` telah mengklasifikasikan 24 modul control dan 451 modul facility, mencakup 542 migration termasuk migration root. Tidak ada modul existing yang belum mempunyai owner.
+Validator `php artisan facility:schema-plan` telah mengklasifikasikan 14 modul control dengan 26 migration dan 451 modul facility dengan 508 migration. Tidak ada modul existing yang belum mempunyai owner.
 
-Provisioning masih diblokir dengan sengaja karena migration operasional mempunyai foreign key ke tabel control. Hasil terbaru 29 Agustus 2026:
+Sebanyak 107 dependency foreign key lintas boundary telah diganti menjadi ID berindeks. Hasil terbaru:
 
-| Tabel control | Migration operasional terdampak |
+| Pemeriksaan | Hasil |
 |---|---:|
-| `users` | 106 |
-| `countries` | 1 |
+| FK migration operasional menuju `users`/`countries` | 0 |
+| Modul tanpa owner | 0 |
+| FK internal control DB yang tetap dipertahankan pada development | 3 |
 
 Angka dihitung per file migration dan akan berubah saat dependency dipindahkan. Command wajib tetap gagal sampai seluruh foreign key lintas boundary dihilangkan. Detail implementasi berada di [`../../RME-Backend/docs/architecture/facility-database-migration.md`](../../RME-Backend/docs/architecture/facility-database-migration.md).
 
@@ -147,7 +148,7 @@ Vertical slice `diagnosis_codes` selesai pada 28 Agustus 2026: model dan validas
 - canary MariaDB nyata membuktikan Faskes A dan B dapat mempunyai `visit.id = 1` dengan isi berbeda; write ke A menghasilkan hitungan `2`, sedangkan B tetap `1`;
 - dua database, record katalog, dan token canary sementara terverifikasi sudah dihapus setelah tes.
 
-Bukti ini menyelesaikan pola runtime untuk slice pertama, bukan membuka provisioning seluruh modul. `facility:schema-plan` tetap menjadi gate dan masih gagal karena 107 migration terdampak FK control.
+Bukti ini menyelesaikan pola runtime untuk slice pertama. `facility:schema-plan` sekarang hijau; provisioning seluruh modul menunggu implementasi command dan canary schema penuh.
 
 ## Routing dan Facility context
 
@@ -286,7 +287,7 @@ Cara mencapainya sebelum menambah cache/infra:
 
 ## Urutan implementasi
 
-1. Selesaikan ledger kepemilikan tabel dan hilangkan dependency lintas boundary; validator ownership modul sudah tersedia, foreign key lintas database masih menjadi blocker.
+1. Selesaikan ledger kepemilikan tabel dan hilangkan dependency lintas boundary; validator ownership modul tersedia dan schema gate sudah hijau.
 2. Tambahkan katalog Faskes, relasi PPK, dan Membership di control DB; katalog/draft Faskes sudah tersedia, Membership belum.
 3. Implementasikan provisioning CLI sesuai [`facility-provisioning.md`](./facility-provisioning.md).
 4. Implementasikan resolver HTTP, job middleware, dan cleanup context.

@@ -28,7 +28,7 @@ Catatan: perubahan status/hasil order lab dan radiologi belum diblok setelah fin
 - [x] Pilih database-per-Faskes pada satu instance MariaDB Grup sesuai [`multi-schema-facility.md`](./multi-schema-facility.md).
 - [x] Implementasikan katalog dan draft UI Faskes yang mengacu ke satu PPK internal.
 - [x] Tambahkan validator ownership migration yang memblokir FK operasional menuju control DB.
-- [ ] Hilangkan dependency lintas database yang dilaporkan `facility:schema-plan`.
+- [x] Hilangkan dependency lintas database yang dilaporkan `facility:schema-plan`.
 - [ ] Implementasikan provisioning/retry CLI sesuai [`facility-provisioning.md`](./facility-provisioning.md).
 - [x] Turunkan facility context HTTP dari route dan validasi Membership tepercaya pada vertical slice Rawat Jalan pertama; jangan memakai pilihan session global.
 - [ ] Perluas scope HTTP ke seluruh modul serta scope queue, scheduler, cache key, storage path, dan sequence.
