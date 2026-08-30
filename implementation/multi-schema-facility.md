@@ -73,6 +73,8 @@ draft → provisioning → provisioned → active ↔ suspended
 
 Hanya `active` yang menerima traffic operasional. `suspended` tetap dapat dipelihara operator, tetapi request dan job bisnis ditolak sebelum membuka database operasional.
 
+Transisi `provisioned | suspended → active` memakai readiness server-side: provisioning lengkap, PPK aktif, dan Admin Faskes efektif. Unit/layanan, integrasi, backup, dan monitoring dikonfirmasi manual oleh Admin Grup; Unit belum dijadikan machine gate karena setup Unit operasional saat ini membutuhkan Facility context aktif dan akan menimbulkan circular bootstrap.
+
 ## Kepemilikan data
 
 ### Control DB
@@ -292,7 +294,7 @@ Cara mencapainya sebelum menambah cache/infra:
 ## Urutan implementasi
 
 1. Selesaikan ledger kepemilikan tabel dan hilangkan dependency lintas boundary; validator ownership modul tersedia dan schema gate sudah hijau.
-2. Tambahkan katalog Faskes, relasi PPK, dan Membership di control DB; katalog/draft Faskes sudah tersedia, Membership belum.
+2. Tambahkan katalog Faskes, relasi PPK, dan Membership di control DB; katalog/draft Faskes dan Membership sudah tersedia.
 3. Implementasikan provisioning CLI sesuai [`facility-provisioning.md`](./facility-provisioning.md).
 4. Implementasikan resolver HTTP, job middleware, dan cleanup context.
 5. Tambahkan log context serta scoping cache/storage/sequence.
