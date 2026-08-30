@@ -152,17 +152,17 @@ Health check provisioning minimum membuktikan:
 
 - provisioning sudah `complete`, versi schema dan waktu provisioning tercatat;
 - PPK masih aktif;
-- tersedia User aktif dengan Membership efektif dan role `admin_faskes` pada Faskes tersebut.
+- tersedia User aktif dengan Membership efektif dan role `admin_faskes` pada Faskes tersebut;
+- minimal satu Unit Layanan aktif tersedia pada database Faskes.
 
-Nilai `ready` hanya berasal dari tiga machine gate tersebut. Sebelum menekan konfirmasi aktivasi, Admin Grup tetap memastikan:
+Nilai `ready` hanya berasal dari empat machine gate tersebut. Sebelum menekan konfirmasi aktivasi, Admin Grup tetap memastikan:
 
 - PPK dan identitas Faskes benar;
-- Ruangan/layanan minimum tersedia sesuai capability;
 - credential integrasi wajib telah diisi dan lolos connection test bila capability diaktifkan;
 - backup memasukkan database baru;
 - monitoring mengenali `facility_id` baru.
 
-Ruangan/layanan sengaja belum menjadi machine gate. CRUD Unit operasional memakai Facility context yang hanya dibuka untuk Faskes aktif; mewajibkan Unit sebelum aktivasi akan membuat circular bootstrap. Konfirmasi aktivasi Admin Grup menjadi bukti manual bahwa pemeriksaan operasional tersebut sudah dilakukan sampai tersedia jalur setup Unit yang aman untuk status `provisioned`.
+Admin Faskes atau aktor global menyiapkan Unit melalui `/f/{facility_code}/wards` saat status `provisioned`. Route maintenance juga tersedia pada status `active` dan `suspended`, selalu membuka database Faskes target, serta tidak dapat dipakai aktor operasional biasa. Jalur ini menghilangkan circular bootstrap sehingga Unit aktif aman dijadikan machine gate.
 
 `POST /api/v1/facilities/{facility}/activate` hanya menerima status `provisioned` atau `suspended` yang lulus machine readiness. `POST /api/v1/facilities/{facility}/suspend` hanya mentransisikan Faskes `active`. Kedua aksi memakai permission administrasi Grup, mengunci record, aman dipanggil ulang pada status tujuan, dan mencatat audit before/after.
 
@@ -183,7 +183,7 @@ UI tidak memuat tombol “buat database”, editor SQL, credential privileged, a
 
 Canary MariaDB 30 Agustus 2026 menghasilkan status `provisioned`, checkpoint `complete`, 508 migration, satu marker identitas database, dan 10 audit event. Canary dimulai dari kegagalan `grant_runtime`, berhasil melalui `--retry`, lalu pemanggilan ulang selesai idempotent. Health check membuktikan akun runtime dapat read/write sementara tetapi tidak dapat membuat database atau menjatuhkan tabel. Seluruh artefak canary dihapus setelah pemeriksaan.
 
-Suite fitur `InstitutionController` 30 Agustus 2026 lulus 6 tes dengan 44 assertion. Skenario aktivasi membuktikan readiness menolak Faskes tanpa Admin Faskes aktif, aktivasi berhasil setelah Membership efektif tersedia, suspend berhasil, dan kedua perubahan status tercatat pada audit.
+Verifikasi 30 Agustus 2026 pada runtime PHP 8.4 lulus 18 tes dengan 101 assertion untuk lifecycle Faskes, Facility context, CRUD Unit, membership lintas database, dan isolasi Kunjungan. Skenario aktivasi membuktikan readiness menolak Faskes sebelum Admin Faskes efektif dan minimal satu Unit aktif tersedia.
 
 - Provisioning draft valid menghasilkan tepat satu database.
 - Retry setelah gagal migrasi melanjutkan database yang sama.
@@ -191,7 +191,7 @@ Suite fitur `InstitutionController` 30 Agustus 2026 lulus 6 tes dengan 44 assert
 - PPK yang sudah dipakai dan database milik Faskes lain ditolak.
 - Gagal pada tiap checkpoint tidak mengaktifkan Faskes dan tidak menghapus data.
 - Runtime credential terbukti tidak dapat membuat/menghapus database.
-- Aktivasi ditolak sebelum seluruh machine gate terpenuhi; pemeriksaan Unit/integrasi/backup/monitoring dikonfirmasi manual oleh Admin Grup.
+- Aktivasi ditolak sebelum seluruh machine gate terpenuhi; integrasi/backup/monitoring tetap dikonfirmasi manual oleh Admin Grup.
 - Audit event dan log terstruktur dapat ditelusuri memakai command/correlation ID.
 
 ## Rollout awal

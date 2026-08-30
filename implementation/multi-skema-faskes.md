@@ -73,7 +73,7 @@ draft → provisioning → provisioned → active ↔ suspended
 
 Hanya `active` yang menerima traffic operasional. `suspended` tetap dapat dipelihara operator, tetapi request dan job bisnis ditolak sebelum membuka database operasional.
 
-Transisi `provisioned | suspended → active` memakai readiness server-side: provisioning lengkap, PPK aktif, dan Admin Faskes efektif. Unit/layanan, integrasi, backup, dan monitoring dikonfirmasi manual oleh Admin Grup; Unit belum dijadikan machine gate karena setup Unit operasional saat ini membutuhkan Facility context aktif dan akan menimbulkan circular bootstrap.
+Transisi `provisioned | suspended → active` memakai readiness server-side: provisioning lengkap, PPK aktif, Admin Faskes efektif, dan minimal satu Unit Layanan aktif pada database Faskes. Admin Faskes/aktor global dapat menyiapkan Unit melalui Facility context maintenance sebelum aktivasi. Integrasi, backup, dan monitoring tetap dikonfirmasi manual oleh Admin Grup.
 
 ## Kepemilikan data
 
