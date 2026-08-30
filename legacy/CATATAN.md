@@ -1,8 +1,8 @@
-# Notes — SIMGOS
+# Catatan — SIMGOS
 
-> **ARSIP PROGRESS LOG — bukan sumber status delivery.** Status aktif hanya dicatat di [`../ROADMAP.md`](../ROADMAP.md).
+> **ARSIP PROGRESS LOG — bukan sumber status delivery.** Status aktif hanya dicatat di [`../RENCANA-PENGEMBANGAN.md`](../RENCANA-PENGEMBANGAN.md).
 
-Catatan teknis & operasional yang melengkapi `PRD.md` dan `UI-UX-KEY.md`. Sumber: eksplorasi kode `RME-Frontend` (progress log `CLAUDE.md`), `routes/index.tsx`, `modulesCatalog.ts`, dan struktur legacy `SIMpel` di `/var/www`.
+Catatan teknis & operasional yang melengkapi `DOKUMEN-PRODUK-2026-08-18.md` dan `PANDUAN-UI-UX-LAMA.md`. Sumber: eksplorasi kode `RME-Frontend` (progress log `CLAUDE.md`), `routes/index.tsx`, `modulesCatalog.ts`, dan struktur legacy `SIMpel` di `/var/www`.
 
 ## 1. Struktur Proyek
 
@@ -42,7 +42,7 @@ Base path deploy frontend: `/apps/inisimgos` (lihat `basename` di `routes/index.
 
 ## 3. Sisa 134 Modul (Scaffold)
 
-Semua diakses lewat rute generik `/module/:moduleId` → `DynamicModulePage`, yang membaca `SIMGOS_ALL_MODULES` (`src/types/modulesCatalog.ts`) untuk render header + deskripsi + tombol placeholder. Ini **bukan implementasi fungsional**, murni penanda "modul ini ada di katalog, belum dibangun". Lihat `PRD.md` Lampiran A untuk daftar lengkap per domain.
+Semua diakses lewat rute generik `/module/:moduleId` → `DynamicModulePage`, yang membaca `SIMGOS_ALL_MODULES` (`src/types/modulesCatalog.ts`) untuk render header + deskripsi + tombol placeholder. Ini **bukan implementasi fungsional**, murni penanda "modul ini ada di katalog, belum dibangun". Lihat `DOKUMEN-PRODUK-2026-08-18.md` Lampiran A untuk daftar lengkap per domain.
 
 ## 4. Urutan Pengerjaan Berikutnya
 
@@ -108,7 +108,7 @@ Sempat diasumsikan tiap role (dokter/perawat/kasir/admin) punya landing page sen
 
 Yang membedakan pengalaman per role adalah **konten di dalam workspace itu**, adaptif terhadap `activeRuangan.category` dan `hasPermission(moduleId, action)` — bukan tujuan redirect setelah login. Kolom `MENU_HOME` di tabel `aplikasi.modules` cuma menandai grup top-level mana yang auto-expand di menu drawer, tidak terkait routing landing page.
 
-**Implikasi untuk SIMGOS**: pola `{ index: true, element: <Navigate to="/visits" replace /> }` yang berlaku universal untuk semua user **sudah benar dan harus dipertahankan** — jangan buat redirect landing berbeda per `roleType`. Kerja yang justru dibutuhkan: pastikan `/visits` benar-benar adaptif secara konten/aksi terhadap `activeRuangan` dan permission (ini yang saat ini belum lengkap), bukan menambah route tujuan baru per role. Detail lengkap ada di `UI-UX-KEY.md` §4.1.
+**Implikasi untuk SIMGOS**: pola `{ index: true, element: <Navigate to="/visits" replace /> }` yang berlaku universal untuk semua user **sudah benar dan harus dipertahankan** — jangan buat redirect landing berbeda per `roleType`. Kerja yang justru dibutuhkan: pastikan `/visits` benar-benar adaptif secara konten/aksi terhadap `activeRuangan` dan permission (ini yang saat ini belum lengkap), bukan menambah route tujuan baru per role. Detail lengkap ada di `PANDUAN-UI-UX-LAMA.md` §4.1.
 
 ## 12. Sistem Desain — Gap: Sisa shadcn Harus Dibersihkan (bukan soal M2 vs M3)
 
@@ -129,7 +129,7 @@ Kondisi kode saat ini:
 
 Server produksi ini punya **DB legacy SIMpel** (schema `master`, `aplikasi`, `bpjs`, dll) dan **DB `simgos`** (dipakai `RME-Backend`) di **MySQL instance yang sama** (`127.0.0.1:3306`). User `admin` (kredensial di `webservice/config/autoload/local.php`, juga dipakai di `RME-Backend/.env`) punya privilege penuh (`SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,...ON *.*`) ke SEMUA schema, termasuk `master`.
 
-Ini memungkinkan pola seeder Laravel yang langsung `INSERT...SELECT` cross-schema tanpa perlu export/fixture file manual — contoh nyata: `Modules/GeneralReferenceType/database/seeders/GeneralReferenceTypeDatabaseSeeder.php` dan `Modules/GeneralReference/database/seeders/GeneralReferenceDatabaseSeeder.php` (import 328 kategori + 3973 nilai referensi dari `master.jenis_referensi`+`master.referensi`, lihat `WORKFLOWS.md` §3 domain 19 untuk detail).
+Ini memungkinkan pola seeder Laravel yang langsung `INSERT...SELECT` cross-schema tanpa perlu export/fixture file manual — contoh nyata: `Modules/GeneralReferenceType/database/seeders/GeneralReferenceTypeDatabaseSeeder.php` dan `Modules/GeneralReference/database/seeders/GeneralReferenceDatabaseSeeder.php` (import 328 kategori + 3973 nilai referensi dari `master.jenis_referensi`+`master.referensi`, lihat `ALUR-KERJA.md` §3 domain 19 untuk detail).
 
 **Catatan penting kalau mau pakai pola ini lagi**:
 - Seeder ini **one-time data migration**, bukan dimaksudkan idempotent-portable — kalau `master` schema legacy nggak ada/nggak bisa diakses (mis. di environment lain, atau kalau DB legacy suatu saat di-decommission), seeder ini akan gagal total. Jangan didaftarkan ke `DatabaseSeeder` utama yang jalan otomatis tiap fresh install — jalankan manual (`php artisan db:seed --class=...`) cuma sekali di environment yang punya akses ke `master` schema.

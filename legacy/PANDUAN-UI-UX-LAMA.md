@@ -1,6 +1,6 @@
-# UI/UX Key — SIMGOS Frontend
+# Panduan UI/UX Lama — SIMGOS Frontend
 
-> **ARSIP BASELINE UI LEGACY — bukan spesifikasi UX target.** Gunakan [`../UI-UX.md`](../UI-UX.md) untuk keputusan aktif.
+> **ARSIP BASELINE UI LEGACY — bukan spesifikasi UX target.** Gunakan [`../PANDUAN-UI-UX.md`](../PANDUAN-UI-UX.md) untuk keputusan aktif.
 
 **Prinsip utama:** UX SIMGOS **meniru SIMpel legacy** (ExtJS desktop-style app di `/var/www/html/production/webapps/application/SIMpel`) sedekat mungkin — pengguna sudah terlatih bertahun-tahun di sana, jadi migrasi UI tidak boleh memaksa mereka belajar ulang pola kerja. Yang berubah hanya *rendering engine* (ExtJS → React), bukan *mental model* navigasi/interaksi.
 
@@ -40,7 +40,7 @@ SIMpel dibangun di atas **Sencha ExtJS Classic** (`classic/resources/ext`, folde
 **Aturan ke depan untuk semua kerja UI baru maupun refactor:**
 - Semua komponen UI baru **harus** dari `src/components/material/Md*.tsx` (atau tambahan baru yang konsisten mengikuti spec Material), tidak pernah dari `src/components/ui/` atau library non-Material lain (jangan import MUI/Ant Design/Chakra/dll juga, meski itu bukan shadcn — prinsipnya sama: harus Material dari Google, bukan sistem lain).
 - Kalau ada komponen yang belum ada versi `Md*`-nya dan masih dipakai dari `src/components/ui/`, buat versi M3-nya dulu di `src/components/material/` sebelum dipakai, jangan pertahankan shadcn "untuk sementara".
-- Lihat `NOTES.md` §12 untuk daftar kerja bersih-bersih shadcn ini.
+- Lihat `CATATAN.md` §12 untuk daftar kerja bersih-bersih shadcn ini.
 
 ## 3. Pola Halaman (Page Patterns)
 

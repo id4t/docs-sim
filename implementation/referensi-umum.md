@@ -1,4 +1,4 @@
-# General Reference
+# Referensi Umum
 
 **Status:** desain diterima; implementasi berjalan.
 
@@ -95,4 +95,3 @@ transfusi darah.
 - Developer dan Superadmin mengikuti scope yang ditetapkan.
 - Password seed wajib diganti sebelum akun membuka fitur lain.
 - `facility:schema-plan` tidak lagi melaporkan sembilan tabel katalog tersebut.
-

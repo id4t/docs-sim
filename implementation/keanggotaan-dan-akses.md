@@ -1,4 +1,4 @@
-# Membership Pengguna dan Akses Unit Layanan
+# Keanggotaan Pengguna dan Akses Unit Layanan
 
 **Status:** pengelolaan Membership dan enforcement HTTP untuk vertical slice Rawat Jalan pertama sudah diimplementasikan; pergantian database per Faskes belum aktif.
 
@@ -29,7 +29,7 @@ Belum termasuk tahap ini:
 
 Catatan transisi: resolver sudah dapat memilih database Faskes pada mode canary dan isolasi slice pertama telah dibuktikan. Mode tetap default mati sampai schema Faskes diprovision dengan aman. Endpoint tanpa provenance Unit tidak dipaksa masuk ke policy Kunjungan karena hasilnya akan memberi rasa aman palsu.
 
-Dokumen ini menetapkan lapisan kewenangan User pada deployment satu Grup yang memiliki banyak Faskes. Kontrak database dan Facility context tetap mengikuti [`multi-schema-facility.md`](./multi-schema-facility.md).
+Dokumen ini menetapkan lapisan kewenangan User pada deployment satu Grup yang memiliki banyak Faskes. Kontrak database dan Facility context tetap mengikuti [`multi-skema-faskes.md`](./multi-skema-faskes.md).
 
 ## Referensi SIMPel
 

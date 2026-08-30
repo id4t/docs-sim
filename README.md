@@ -28,18 +28,18 @@ Dokumen workflow mencantumkan tautan baseline atau kontrak yang relevan. ADR men
 
 ## Peta dokumen
 
-- [`PRODUCT.md`](./PRODUCT.md): tujuan produk, pengguna, scope, dan kriteria keberhasilan.
-- [`ARCHITECTURE.md`](./ARCHITECTURE.md): deployment per Grup, isolasi Faskes, modular monolith, dan prinsip integrasi.
-- [`DOMAIN-MODEL.md`](./DOMAIN-MODEL.md): relasi dan invariant domain utama.
-- [`UI-UX.md`](./UI-UX.md): strategi UX, encounter workspace, permission, perangkat, dan state UI.
-- [`ROADMAP.md`](./ROADMAP.md): urutan vertical slice dan satu-satunya sumber status delivery.
-- [`implementation/gate-0.md`](./implementation/gate-0.md): backlog engineering fondasi dan progres teknisnya.
+- [`PRODUK.md`](./PRODUK.md): tujuan produk, pengguna, scope, dan kriteria keberhasilan.
+- [`ARSITEKTUR.md`](./ARSITEKTUR.md): deployment per Grup, isolasi Faskes, modular monolith, dan prinsip integrasi.
+- [`MODEL-DOMAIN.md`](./MODEL-DOMAIN.md): relasi dan invariant domain utama.
+- [`PANDUAN-UI-UX.md`](./PANDUAN-UI-UX.md): strategi UX, encounter workspace, permission, perangkat, dan state UI.
+- [`RENCANA-PENGEMBANGAN.md`](./RENCANA-PENGEMBANGAN.md): urutan vertical slice dan satu-satunya sumber status delivery.
+- [`implementation/fondasi-awal.md`](./implementation/fondasi-awal.md): backlog engineering fondasi dan progres teknisnya.
 - [`implementation/ppk.md`](./implementation/ppk.md): kontrak Master PPK, referensi SIMPel, acceptance, dan urutan implementasi.
-- [`implementation/general-reference.md`](./implementation/general-reference.md): katalog referensi bersama, ownership, seed, API, dan konsolidasi tabel duplikat.
-- [`implementation/demo-accounts.md`](./implementation/demo-accounts.md): akun lokal per role, kata sandi awal, dan aturan keamanan bootstrap.
-- [`implementation/membership-access.md`](./implementation/membership-access.md): lapisan kewenangan Faskes–role–Unit Layanan, lifecycle Membership, pemilihan konteks, dan Monitoring Global.
-- [`implementation/multi-schema-facility.md`](./implementation/multi-schema-facility.md): keputusan database-per-Faskes, Facility context, ownership data, performa, migrasi, dan acceptance.
-- [`implementation/facility-provisioning.md`](./implementation/facility-provisioning.md): kontrak draft UI, provisioning/retry CLI, keamanan, status, dan aktivasi Faskes.
+- [`implementation/referensi-umum.md`](./implementation/referensi-umum.md): katalog referensi bersama, ownership, seed, API, dan konsolidasi tabel duplikat.
+- [`implementation/akun-demo.md`](./implementation/akun-demo.md): akun lokal per role, kata sandi awal, dan aturan keamanan bootstrap.
+- [`implementation/keanggotaan-dan-akses.md`](./implementation/keanggotaan-dan-akses.md): lapisan kewenangan Faskes–role–Unit Layanan, lifecycle Membership, pemilihan konteks, dan Monitoring Global.
+- [`implementation/multi-skema-faskes.md`](./implementation/multi-skema-faskes.md): keputusan database-per-Faskes, Facility context, ownership data, performa, migrasi, dan acceptance.
+- [`implementation/penyiapan-faskes.md`](./implementation/penyiapan-faskes.md): kontrak draft UI, provisioning/retry CLI, keamanan, status, dan aktivasi Faskes.
 - [`workflows/rawat-jalan-bpjs.md`](./workflows/rawat-jalan-bpjs.md): journey operasional pertama beserta failure path.
 - [`integrations/bpjs.md`](./integrations/bpjs.md): batas Antrean Online, VClaim, Aplicares, dan ICare.
 - [`integrations/eklaim.md`](./integrations/eklaim.md): coding, grouping, pengajuan, dispute, dan rekonsiliasi klaim.
@@ -50,7 +50,7 @@ Dokumen workflow mencantumkan tautan baseline atau kontrak yang relevan. ADR men
 
 ## Aturan pemeliharaan
 
-- Status fitur hanya dicatat di `ROADMAP.md`; jangan menyalin angka progres ke dokumen lain.
+- Status fitur hanya dicatat di `RENCANA-PENGEMBANGAN.md`; jangan menyalin angka progres ke dokumen lain.
 - Workflow ditulis sebagai perjalanan lintas domain, bukan daftar halaman atau tabel.
 - Setiap transisi final, batal, koreksi, pembayaran, dan pengiriman eksternal harus mencantumkan aktor, precondition, postcondition, serta audit event.
 - Tandai fakta eksternal dengan tautan sumber dan tanggal verifikasi.

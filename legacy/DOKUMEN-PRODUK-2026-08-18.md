@@ -1,10 +1,10 @@
-# PRD — SIMGOS (Sistem Informasi Manajemen Rumah Sakit)
+# Dokumen Produk — SIMGOS (Sistem Informasi Manajemen Rumah Sakit)
 
 > **ARSIP — bukan spesifikasi target.** Dokumen ini dipertahankan sebagai baseline historis per 2026-08-18. Gunakan [`../README.md`](../README.md) untuk sumber kebenaran aktif.
 
 **Versi dokumen:** 1.0 — 2026-08-18
 **Status:** Living document, sinkron dengan `RME-Frontend/src/types/modulesCatalog.ts` dan `RME-Frontend/src/routes/index.tsx` per tanggal di atas.
-**Produk referensi (legacy):** SIMpel — ExtJS desktop-style app di `/var/www/html/production/webapps/application/SIMpel`. SIMGOS adalah **re-platform** SIMpel ke stack modern (React + Laravel), bukan produk baru dari nol. UX target: **sedekat mungkin dengan SIMpel**, lihat `UI-UX-KEY.md`.
+**Produk referensi (legacy):** SIMpel — ExtJS desktop-style app di `/var/www/html/production/webapps/application/SIMpel`. SIMGOS adalah **re-platform** SIMpel ke stack modern (React + Laravel), bukan produk baru dari nol. UX target: **sedekat mungkin dengan SIMpel**, lihat `PANDUAN-UI-UX-LAMA.md`.
 
 ---
 
@@ -55,12 +55,12 @@ Dari 147 modul katalog, **50 sudah punya halaman dedicated** (list/form/detail R
 | 11 domain lain (14, 20, 21, 22, 24, 25, 27, 28, 29, 30) | 39 | 0 |
 | **Total** | **147** | **50** |
 
-Detail per halaman ada di `NOTES.md` §2. Urutan pengerjaan modul berikutnya mengikuti urutan histori commit backend (lihat `NOTES.md` §4).
+Detail per halaman ada di `CATATAN.md` §2. Urutan pengerjaan modul berikutnya mengikuti urutan histori commit backend (lihat `CATATAN.md` §4).
 
 ## 5. Fase Pengerjaan
 
 - **Fase 0 — Auth**: selesai. Login, session persist, protected route.
-- **Fase 1 — Master Data RS**: selesai (audit ulang penuh vs legacy lewat Playwright, semua gap field ditemukan & diperbaiki — lihat `NOTES.md` §5).
+- **Fase 1 — Master Data RS**: selesai (audit ulang penuh vs legacy lewat Playwright, semua gap field ditemukan & diperbaiki — lihat `CATATAN.md` §5).
 - **Fase 2 — Pelayanan Pasien (sedang berjalan)**: Pendaftaran (Registration+Visit) ✅, Pembayaran (Invoice/InvoiceItem/Payment) ✅, Rekam Medis (ClinicalNote, DiagnosisCode) ✅, selanjutnya: Prescription/Item, InventoryItem, PendaftaranGuarantor, LayananLabOrder/LabResult, dst — urutan persis mengikuti `git log` modul backend.
 - **Fase 3+ (belum dimulai)**: sisa ~130 modul scaffold di atas, termasuk seluruh domain Laporan, Dashboard granular, Monitoring, Integrasi BPJS/SatuSehat, Inventory penuh.
 
@@ -74,7 +74,7 @@ Detail per halaman ada di `NOTES.md` §2. Urutan pengerjaan modul berikutnya men
 - **Belum**: IGD, rawat inap penuh (admisi formal), pendaftaran lab/radiologi langsung, triage loket, forensik/jenazah.
 
 ### 6.2 Layanan (domain 11)
-- Penerimaan pasien di ruangan aktif dengan antrean (worklist `/visits`, filter Ruangan+Status, kolom identitas pasien Nama+No.RM — diverifikasi field-by-field vs grid legacy `kunjungan.List`, lihat `WORKFLOWS.md` §3 domain 11).
+- Penerimaan pasien di ruangan aktif dengan antrean (worklist `/visits`, filter Ruangan+Status, kolom identitas pasien Nama+No.RM — diverifikasi field-by-field vs grid legacy `kunjungan.List`, lihat `ALUR-KERJA.md` §3 domain 11).
 - Input tindakan medis per kunjungan (tab "Tindakan" di Visit Workspace `/visits/:id`) — pilih Tindakan (master `GeneralService`) + Petugas Pelaksana, status `completed`/`cancelled` (append-only: tidak bisa diedit/dihapus, cuma dibatalkan via status).
 - Order resep obat/lab/radiologi/konsul dari satu titik entry.
 - **Belum**: search by No.RM/No.Pendaftaran/Nama & filter DPJP/Jenis Kunjungan/Penjamin/rentang tanggal di worklist 1101, kolom Penjamin, badge titipan/paket/iterasi resep, info kamar/tempat-tidur/kelas rawat inap, guard lock tindakan medis saat kunjungan final, daftar petugas pelaksana multi-orang per tindakan (`MedicalProcedureStaff` backend sudah ada, frontend belum pakai) — plus penerimaan hasil lab/radiologi (feedback loop), ekspertise, kelahiran/VK, pemakaian BHP ruangan, KPO, panggilan antrean.
@@ -91,7 +91,7 @@ Detail per halaman ada di `NOTES.md` §2. Urutan pengerjaan modul berikutnya men
 
 ### 6.5 Master Data (domain 19)
 - Pegawai (dengan kontak, kartu identitas, dropdown spesialis), Pengguna (akun+role+akses ruangan), Ruangan (Ward/Room/Bed + penugasan Dokter/Spesialis/Paramedis/Staff/Tindakan per ward), Profil Institusi.
-- Referensi: 8 kategori demografi pasien (Agama/Jenis Kelamin/Pendidikan/dll) sebagai FK dedicated (`/genders`, `/professions`, `/religions`, dst — dipakai Patient/Employee), **plus** Master Referensi generik (`/references`, halaman Master-Detail: kiri 328 kategori + kanan nilai per kategori) menutupi sisa ~320 kategori referensi lintas modul (skala penilaian Rekam Medis, jenis tagihan, kategori tindakan, dll) — data diimpor langsung dari DB legacy (3973 nilai), lihat `WORKFLOWS.md` §3 domain 19 & `NOTES.md` untuk detail seeder cross-schema.
+- Referensi: 8 kategori demografi pasien (Agama/Jenis Kelamin/Pendidikan/dll) sebagai FK dedicated (`/genders`, `/professions`, `/religions`, dst — dipakai Patient/Employee), **plus** Master Referensi generik (`/references`, halaman Master-Detail: kiri 328 kategori + kanan nilai per kategori) menutupi sisa ~320 kategori referensi lintas modul (skala penilaian Rekam Medis, jenis tagihan, kategori tindakan, dll) — data diimpor langsung dari DB legacy (3973 nilai), lihat `ALUR-KERJA.md` §3 domain 19 & `CATATAN.md` untuk detail seeder cross-schema.
 - Tindakan (`/services`, CRUD Kode/Nama/Kategori/Tarif/Status) — kategori dropdown-nya konsumsi langsung Master Referensi (`category=Kategori Tindakan`, 12 nilai dari legacy), tabel `services` ini juga yang dipakai 1102 Tindakan Medis di Visit Workspace.
 - **Belum**: 21 dari 28 sub-master (Barang/obat, Tarif, PPK, BPJS config, Wilayah, dst) — plus di Master Referensi generik sendiri: UI kelola kategori (`ReferenceType`) dari frontend (sekarang cuma via DB/seeder), relasi FK proper `ReferenceType`↔`Reference`; di Master Tindakan: field `type_id`/`GeneralServiceType` belum dipakai (tidak ada data existing yang mengisinya), tarif (`GeneralServiceTariff`) belum ada UI kelola sendiri (cuma tampil read-only via `current_price`).
 
@@ -108,13 +108,13 @@ Informasi publik, Tempat Tidur (occupancy board), Inventory, Integrasi BPJS/LIS,
 - **Konsistensi data legacy**: setiap modul baru wajib diverifikasi field-by-field terhadap layar SIMpel asli sebelum dianggap selesai — jangan asumsi struktur "seragam" antar modul (format response API bisa beda per modul: `{data: ...}` wrapping vs custom).
 - **Audit trail**: modul rekam medis & finansial harus append-only di titik yang legal-sensitive (CPPT, Diagnosis, Payment) — tidak boleh ditambah tombol edit/delete meskipun terasa tidak lengkap dari sisi CRUD generik.
 - **Skala**: 474 modul backend total, jadi arsitektur frontend harus tetap scalable — makanya ada `DynamicModulePage` sebagai fallback generik alih-alih blank 404 untuk modul yang belum dibangun.
-- **Printing**: banyak modul punya kebutuhan cetak (kartu, wristband, kuitansi, lembar RM) — perlu strategi cetak konsisten (lihat `UI-UX-KEY.md` §6).
+- **Printing**: banyak modul punya kebutuhan cetak (kartu, wristband, kuitansi, lembar RM) — perlu strategi cetak konsisten (lihat `PANDUAN-UI-UX-LAMA.md` §6).
 
 ## 8. Out of Scope (untuk dokumen ini)
 
 - Detail skema database (lihat `simgos_dump.sql` / migrasi Laravel langsung).
 - Kontrak API per endpoint (lihat kode `Modules/*` di `RME-Backend`).
-- Keputusan desain untuk gap yang sengaja dilewatkan (tab "Barang" di Ruangan legacy, dll — didaftar di `NOTES.md` §6).
+- Keputusan desain untuk gap yang sengaja dilewatkan (tab "Barang" di Ruangan legacy, dll — didaftar di `CATATAN.md` §6).
 
 ## 9. Lampiran A — Katalog Modul Lengkap (147 modul / 18 domain)
 

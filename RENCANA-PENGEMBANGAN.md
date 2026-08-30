@@ -1,4 +1,4 @@
-# Roadmap — SIMGOS
+# Rencana Pengembangan — SIMGOS
 
 Dokumen ini adalah satu-satunya sumber status delivery. Jangan menyalin jumlah modul selesai ke PRD, workflow, atau catatan lain.
 

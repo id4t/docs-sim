@@ -2,7 +2,7 @@
 
 **Status:** keputusan arsitektur diterima; schema gate, provisioning CLI, dan runtime switch opt-in untuk vertical slice Rawat Jalan sudah teruji.
 
-Dokumen ini adalah kontrak utama untuk Facility context, kepemilikan data, koneksi database, queue, logging, performa, migrasi, dan backup per Faskes. Proses penambahan Faskes dijelaskan lebih rinci di [`facility-provisioning.md`](./facility-provisioning.md).
+Dokumen ini adalah kontrak utama untuk Facility context, kepemilikan data, koneksi database, queue, logging, performa, migrasi, dan backup per Faskes. Proses penambahan Faskes dijelaskan lebih rinci di [`penyiapan-faskes.md`](./penyiapan-faskes.md).
 
 ## Keputusan final
 
@@ -137,7 +137,7 @@ Sebanyak 110 dependency foreign key lintas boundary telah diganti menjadi ID ber
 | Modul tanpa owner | 0 |
 | FK internal control DB yang tetap dipertahankan pada development | 3 |
 
-Angka dihitung per file migration dan akan berubah saat dependency dipindahkan. Command wajib tetap gagal sampai seluruh foreign key lintas boundary dihilangkan. Detail implementasi berada di [`../../RME-Backend/docs/architecture/facility-database-migration.md`](../../RME-Backend/docs/architecture/facility-database-migration.md).
+Angka dihitung per file migration dan akan berubah saat dependency dipindahkan. Command wajib tetap gagal sampai seluruh foreign key lintas boundary dihilangkan. Detail implementasi berada di [`../../RME-Backend/docs/architecture/migrasi-database-faskes.md`](../../RME-Backend/docs/architecture/migrasi-database-faskes.md).
 
 Vertical slice `diagnosis_codes` selesai pada 28 Agustus 2026: model dan validasi dapat memakai koneksi control, query penutupan episode tidak lagi melakukan join lintas database, serta lima FK operasional dilepas tanpa mengubah ID diagnosis existing. Mode satu database tetap menjadi default sampai `CONTROL_DB_CONNECTION=control` diaktifkan saat rollout dua database.
 
@@ -198,7 +198,7 @@ Satu User dapat mempunyai Membership berbeda pada beberapa Faskes. Membership mi
 - status dan masa aktif;
 - cakupan Unit Layanan per role.
 
-Role operasional biasa selalu membutuhkan Membership yang sesuai. Developer dan Superadmin adalah pengecualian global yang diterima: keduanya tetap memakai satu Facility context saat membuka workspace operasional dan akses sensitifnya diaudit khusus. Kontrak role, Unit Layanan, lifecycle, serta Monitoring Global berada di [`membership-access.md`](./membership-access.md).
+Role operasional biasa selalu membutuhkan Membership yang sesuai. Developer dan Superadmin adalah pengecualian global yang diterima: keduanya tetap memakai satu Facility context saat membuka workspace operasional dan akses sensitifnya diaudit khusus. Kontrak role, Unit Layanan, lifecycle, serta Monitoring Global berada di [`keanggotaan-dan-akses.md`](./keanggotaan-dan-akses.md).
 
 ## Queue, scheduler, cache, dan storage
 
@@ -295,7 +295,7 @@ Cara mencapainya sebelum menambah cache/infra:
 
 1. Selesaikan ledger kepemilikan tabel dan hilangkan dependency lintas boundary; validator ownership modul tersedia dan schema gate sudah hijau.
 2. Tambahkan katalog Faskes, relasi PPK, dan Membership di control DB; katalog/draft Faskes dan Membership sudah tersedia.
-3. Implementasikan provisioning CLI sesuai [`facility-provisioning.md`](./facility-provisioning.md).
+3. Implementasikan provisioning CLI sesuai [`penyiapan-faskes.md`](./penyiapan-faskes.md).
 4. Implementasikan resolver HTTP, job middleware, dan cleanup context.
 5. Tambahkan log context serta scoping cache/storage/sequence.
 6. Provision dua Faskes canary dengan schema identik.

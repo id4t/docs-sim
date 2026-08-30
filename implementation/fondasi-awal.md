@@ -1,6 +1,6 @@
-# Gate 0 Implementation Backlog
+# Backlog Implementasi Fondasi Awal
 
-Dokumen ini memecah Gate 0 di [`../ROADMAP.md`](../ROADMAP.md) menjadi urutan engineering. Status produk tetap hanya diperbarui di Roadmap; checklist ini adalah urutan kerja teknis.
+Dokumen ini memecah Gate 0 di [`../RENCANA-PENGEMBANGAN.md`](../RENCANA-PENGEMBANGAN.md) menjadi urutan engineering. Status produk tetap hanya diperbarui di Roadmap; checklist ini adalah urutan kerja teknis.
 
 ## 1. Lifecycle Kunjungan
 
@@ -18,18 +18,18 @@ Catatan: perubahan status/hasil order lab dan radiologi belum diblok setelah fin
 
 ## 2. Authorization
 
-- [x] Definisikan Membership User–Faskes–role–Unit Layanan dan profesi sesuai [`membership-access.md`](./membership-access.md).
+- [x] Definisikan Membership User–Faskes–role–Unit Layanan dan profesi sesuai [`keanggotaan-dan-akses.md`](./keanggotaan-dan-akses.md).
 - [ ] Tambahkan policy untuk admit, record, verify, finalize, amend, bill, code, dan submit.
 - [ ] Hapus `authorize(): true` dari command sensitif.
 - [ ] Tambahkan matrix test role, Ruangan, assignment, dan cross-Faskes denial.
 
 ## 3. Facility isolation
 
-- [x] Pilih database-per-Faskes pada satu instance MariaDB Grup sesuai [`multi-schema-facility.md`](./multi-schema-facility.md).
+- [x] Pilih database-per-Faskes pada satu instance MariaDB Grup sesuai [`multi-skema-faskes.md`](./multi-skema-faskes.md).
 - [x] Implementasikan katalog dan draft UI Faskes yang mengacu ke satu PPK internal.
 - [x] Tambahkan validator ownership migration yang memblokir FK operasional menuju control DB.
 - [x] Hilangkan dependency lintas database yang dilaporkan `facility:schema-plan`.
-- [x] Implementasikan provisioning/retry CLI sesuai [`facility-provisioning.md`](./facility-provisioning.md).
+- [x] Implementasikan provisioning/retry CLI sesuai [`penyiapan-faskes.md`](./penyiapan-faskes.md).
 - [x] Turunkan facility context HTTP dari route dan validasi Membership tepercaya pada vertical slice Rawat Jalan pertama; jangan memakai pilihan session global.
 - [ ] Perluas scope HTTP ke seluruh modul serta scope queue, scheduler, cache key, storage path, dan sequence.
 - [x] Tambahkan test dua Faskes untuk read, route binding, write isolation, dan cleanup koneksi pada vertical slice Rawat Jalan.

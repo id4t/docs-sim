@@ -1,4 +1,4 @@
-# Product Definition — SIMGOS
+# Definisi Produk — SIMGOS
 
 **Status:** authoritative  
 **Ditetapkan:** 2026-08-24  
@@ -39,7 +39,7 @@ Rincian dan exception path berada di [`workflows/rawat-jalan-bpjs.md`](./workflo
 
 ## Prinsip penerimaan
 
-Sebuah fitur tidak dianggap selesai hanya karena endpoint dan form tersedia. Status delivery mengikuti definisi di [`ROADMAP.md`](./ROADMAP.md), dan `production-ready` membutuhkan:
+Sebuah fitur tidak dianggap selesai hanya karena endpoint dan form tersedia. Status delivery mengikuti definisi di [`RENCANA-PENGEMBANGAN.md`](./RENCANA-PENGEMBANGAN.md), dan `production-ready` membutuhkan:
 
 - invariant bisnis ditegakkan backend;
 - otorisasi berdasarkan Faskes, profesi, Ruangan, dan aksi;
@@ -59,4 +59,3 @@ Selama belum ada validator operasional, fitur hanya dapat mencapai `integration-
 - Mendukung FKTP/PCare dan FKRTL secara bersamaan.
 - Menyelesaikan seluruh katalog modul sebelum menguji journey pertama.
 - Menganggap dokumentasi atau perilaku SIMPel sebagai pengganti kontrak resmi terkini.
-

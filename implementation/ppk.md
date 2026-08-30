@@ -18,7 +18,7 @@ Admin Faskes dapat mencari dan memelihara satu direktori Pemberi Pelayanan Keseh
 - Record dinonaktifkan melalui `is_active`; PPK tidak dihapus.
 - Semua Admin Faskes dalam Grup boleh menulis. Update memakai optimistic locking dan menolak versi usang dengan HTTP 409.
 - Semua perubahan menyimpan aktor, waktu, nilai sebelum, dan nilai sesudah.
-- Kelak setiap Facility menunjuk tepat satu PPK melalui `facility.ppk_id` unik. PPK tanpa Facility adalah eksternal. Implementasikan relasi ini hanya setelah aggregate Facility tersedia; lihat `gate-0.md` bagian Facility isolation.
+- Kelak setiap Facility menunjuk tepat satu PPK melalui `facility.ppk_id` unik. PPK tanpa Facility adalah eksternal. Implementasikan relasi ini hanya setelah aggregate Facility tersedia; lihat `fondasi-awal.md` bagian Facility isolation.
 
 ## Requiredness
 

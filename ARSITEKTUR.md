@@ -1,4 +1,4 @@
-# Architecture — SIMGOS
+# Arsitektur — SIMGOS
 
 ## Bentuk sistem
 
@@ -31,9 +31,9 @@ Setiap Faskes mempunyai sendiri:
 - kode BPJS/Kemenkes, Organization/Location SATUSEHAT, endpoint, credential, serta scheduler;
 - audit trail dan kebijakan retensi.
 
-Request wajib mempunyai facility context yang berasal dari route lalu divalidasi terhadap Membership atau pengecualian aktor global yang eksplisit, bukan `facility_id` bebas dari payload atau satu pilihan global di session. Semua query dan job harus berjalan dalam scope Faskes. Tes isolasi wajib membuktikan identitas dari Faskes A tidak dapat membaca atau menulis data Faskes B. Detail kewenangan berada di [`implementation/membership-access.md`](./implementation/membership-access.md).
+Request wajib mempunyai facility context yang berasal dari route lalu divalidasi terhadap Membership atau pengecualian aktor global yang eksplisit, bukan `facility_id` bebas dari payload atau satu pilihan global di session. Semua query dan job harus berjalan dalam scope Faskes. Tes isolasi wajib membuktikan identitas dari Faskes A tidak dapat membaca atau menulis data Faskes B. Detail kewenangan berada di [`implementation/keanggotaan-dan-akses.md`](./implementation/keanggotaan-dan-akses.md).
 
-Faskes baru dibuat sebagai draft oleh Admin Grup. Operator menjalankan provisioning database dan migrasi lewat CLI; runtime web tidak memiliki privilege `CREATE DATABASE`. Kontrak lengkap berada di [`implementation/multi-schema-facility.md`](./implementation/multi-schema-facility.md) dan [`implementation/facility-provisioning.md`](./implementation/facility-provisioning.md).
+Faskes baru dibuat sebagai draft oleh Admin Grup. Operator menjalankan provisioning database dan migrasi lewat CLI; runtime web tidak memiliki privilege `CREATE DATABASE`. Kontrak lengkap berada di [`implementation/multi-skema-faskes.md`](./implementation/multi-skema-faskes.md) dan [`implementation/penyiapan-faskes.md`](./implementation/penyiapan-faskes.md).
 
 Master Patient Index lintas Faskes adalah capability terpisah pada fase lanjutan. MPI tidak memberi izin otomatis untuk berbagi rekam medis atau transaksi.
 

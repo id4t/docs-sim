@@ -1,4 +1,4 @@
-# UI/UX — SIMGOS
+# Panduan UI/UX — SIMGOS
 
 ## Prinsip
 
@@ -89,7 +89,7 @@ Menu “Integrasi” digunakan untuk konfigurasi dan monitoring global, bukan se
 
 ## Definisi UI selesai
 
-CRUD yang berjalan hanya mencapai `implemented`. UI baru dapat mencapai `workflow-integrated` bila terhubung ke tugas sebelum/sesudahnya dan menangani seluruh state relevan. Status lebih tinggi mengikuti [`ROADMAP.md`](./ROADMAP.md).
+CRUD yang berjalan hanya mencapai `implemented`. UI baru dapat mencapai `workflow-integrated` bila terhubung ke tugas sebelum/sesudahnya dan menangani seluruh state relevan. Status lebih tinggi mengikuti [`RENCANA-PENGEMBANGAN.md`](./RENCANA-PENGEMBANGAN.md).
 
 ## Migrasi dari UI saat ini
 
@@ -98,4 +98,3 @@ CRUD yang berjalan hanya mencapai `implemented`. UI baru dapat mencapai `workflo
 - Ubah `VisitWorkspace` dari kumpulan tab universal menjadi area task-oriented adaptif.
 - Jangan menganggap halaman scaffold sebagai modul selesai.
 - Tambahkan desain permission, final/locked state, failure state, dan monitoring sebelum memperluas katalog.
-

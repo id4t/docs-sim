@@ -1,8 +1,8 @@
-# Provisioning Faskes
+# Penyiapan Faskes
 
 **Status:** command CLI, retry, checkpoint, audit, privilege runtime, canary schema penuh, serta aktivasi/suspend melalui API dan UI selesai.
 
-Prasyarat implementasi command adalah `php artisan facility:schema-plan` berakhir sukses. Prasyarat tersebut terpenuhi pada 29 Agustus 2026 setelah dependency foreign key lintas boundary dilepas; lihat [`multi-schema-facility.md`](./multi-schema-facility.md#hasil-audit-migrasi-29-agustus-2026).
+Prasyarat implementasi command adalah `php artisan facility:schema-plan` berakhir sukses. Prasyarat tersebut terpenuhi pada 29 Agustus 2026 setelah dependency foreign key lintas boundary dilepas; lihat [`multi-skema-faskes.md`](./multi-skema-faskes.md#hasil-audit-migrasi-29-agustus-2026).
 
 Dokumen ini menetapkan jalur penambahan Faskes yang jarang dilakukan: Admin Grup menyiapkan draft melalui UI, lalu operator menjalankan provisioning database melalui CLI. Jalur ini sengaja tidak memberi runtime web privilege untuk membuat database.
 
@@ -196,4 +196,4 @@ Suite fitur `InstitutionController` 30 Agustus 2026 lulus 6 tes dengan 44 assert
 
 ## Rollout awal
 
-Provision dua Faskes canary. Setelah keduanya lulus isolasi, retry, restore, dan target performa dalam [`multi-schema-facility.md`](./multi-schema-facility.md), barulah pola ini dipakai untuk Faskes berikutnya. Jangan membangun orchestrator provisioning web atau sistem plugin provisioning sebelum jalur CLI nyata menjadi hambatan operasional.
+Provision dua Faskes canary. Setelah keduanya lulus isolasi, retry, restore, dan target performa dalam [`multi-skema-faskes.md`](./multi-skema-faskes.md), barulah pola ini dipakai untuk Faskes berikutnya. Jangan membangun orchestrator provisioning web atau sistem plugin provisioning sebelum jalur CLI nyata menjadi hambatan operasional.
