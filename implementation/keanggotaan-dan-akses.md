@@ -1,6 +1,6 @@
 # Keanggotaan Pengguna dan Akses Unit Layanan
 
-**Status:** pengelolaan Membership dan enforcement HTTP untuk vertical slice Rawat Jalan pertama sudah diimplementasikan; pergantian database per Faskes belum aktif.
+**Status:** pengelolaan Membership, Facility context, dan enforcement HTTP untuk vertical slice Rawat Jalan pertama sudah diimplementasikan; perluasan ke seluruh modul masih berjalan.
 
 ## Bukti implementasi 29 Agustus 2026
 
@@ -18,6 +18,7 @@ Sudah tersedia:
 - validasi role per Faskes dan scope Unit pada registrasi, kunjungan, pencatatan klinis inti, penutupan episode, dan monitor SATUSEHAT;
 - query daftar Kunjungan discoped berdasarkan Unit sebelum pagination;
 - navigasi workspace disaring berdasarkan role Membership aktif.
+- halaman CRUD Unit Layanan memakai route `/f/{facility}/wards`, sehingga query mengikuti database Faskes aktif dan hanya Admin Faskes/aktor global yang dapat mengelolanya.
 
 Belum termasuk tahap ini:
 
@@ -26,6 +27,8 @@ Belum termasuk tahap ini:
 - perluasan enforcement ke modul operasional di luar slice pertama;
 - record level pasien yang belum mempunyai provenance Kunjungan, termasuk alergi;
 - Monitoring Global lintas Faskes.
+- kontraksi endpoint Ward lama dan pemindahan seluruh consumer Ward lama ke route Facility-scoped;
+- validasi serta serialisasi pilihan Unit pada Membership lintas database Faskes.
 
 Catatan transisi: resolver sudah dapat memilih database Faskes pada mode canary dan isolasi slice pertama telah dibuktikan. Mode tetap default mati sampai schema Faskes diprovision dengan aman. Endpoint tanpa provenance Unit tidak dipaksa masuk ke policy Kunjungan karena hasilnya akan memberi rasa aman palsu.
 

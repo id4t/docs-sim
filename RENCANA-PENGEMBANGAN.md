@@ -19,6 +19,8 @@ Maturity dicatat per capability/journey, bukan per folder backend atau halaman f
 
 **Status:** `scaffolded`
 
+**Kemajuan teknis terukur:** 23 dari 41 checklist fondasi rinci selesai (56%) pada 30 Agustus 2026; lihat [`implementation/fondasi-awal.md`](./implementation/fondasi-awal.md). Angka ini bukan persentase production-ready.
+
 - [ ] Facility context tepercaya dan isolasi database per Faskes.
 - [ ] Membership, role/profesi, Ruangan, dan policy aksi backend.
 - [ ] Sequence dokumen concurrency-safe.
