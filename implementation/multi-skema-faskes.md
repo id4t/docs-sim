@@ -106,6 +106,8 @@ Transisi `provisioned | suspended → active` memakai readiness server-side: pro
 - Transaksi SQL tidak menyeberang antar-Faskes.
 - Laporan Grup memakai proyeksi/agregat, bukan join bebas lintas database pada request pengguna.
 
+Vertical slice master operasional pada 30 Agustus 2026 telah memindahkan akses UI pegawai, dokter, departemen medis, layanan, kelas Ruangan, dan tarif ke route ber-Facility context. Tes fisik dua SQLite database membuktikan read/write pegawai, layanan, dan tarif terisolasi walaupun ID lokalnya sama. Model User tetap dipaksa membaca control DB agar relasi akun tidak ikut berpindah saat koneksi Faskes aktif.
+
 ## Dampak modul existing
 
 Audit awal menemukan 475 direktori modul, 489 model, dan 538 migrasi. Hampir semua model masih mengandalkan koneksi default, sehingga resolver harus terpusat; menambahkan pemilihan koneksi pada setiap controller akan rawan bocor.

@@ -24,6 +24,9 @@ Sudah tersedia:
 - serialisasi Membership membaca nama/status Unit dari database Faskes masing-masing, sehingga ID lokal yang sama pada dua Faskes tidak tertukar;
 - dropdown operasional memakai `/f/{facility}/units?role=...`, bukan endpoint maintenance, sehingga hanya Unit sesuai role assignment yang tersedia;
 - checklist aktivasi kini memeriksa keberadaan minimal satu Unit Layanan aktif.
+- master pegawai, layanan, tarif, dokter, dan departemen medis pada UI aktif memakai route `/f/{facility_code}` dan database Faskes terpilih;
+- anggota Faskes biasa hanya menerima direktori pegawai ringkas untuk kebutuhan operasional, sedangkan data pribadi dan mutasi master dibatasi untuk Admin Faskes/aktor global;
+- tes dua database membuktikan ID pegawai, layanan, dan tarif yang sama tetap membaca nilai Faskes masing-masing serta penulisan tidak menyeberang database.
 
 Belum termasuk tahap ini:
 
@@ -35,7 +38,7 @@ Belum termasuk tahap ini:
 
 Catatan transisi: resolver sudah dapat memilih database Faskes pada mode canary. Tes fisik membuktikan dua database boleh sama-sama mempunyai `ward.id = 1` tanpa nama Unit atau grant Membership tertukar. Mode runtime tetap default mati sampai schema Faskes diprovision dengan aman. Endpoint tanpa provenance Unit tidak dipaksa masuk ke policy Kunjungan karena hasilnya akan memberi rasa aman palsu.
 
-Kontrak baru wajib memakai prefix `/f/{facility_code}` untuk Unit, referensi Unit, tenaga/layanan yang dipakai penugasan, dan lima resource penugasan Unit. Endpoint lama tanpa prefix masih dipertahankan sementara untuk consumer modul lama; frontend baru dilarang menambah pemakaian endpoint tersebut. Kontraksi dilakukan per resource setelah pencarian consumer, migrasi tes, dan rollout kompatibilitas membuktikan pemakaiannya nol.
+Kontrak baru wajib memakai prefix `/f/{facility_code}` untuk Unit, referensi Unit, tenaga/layanan/tarif, dan lima resource penugasan Unit. Consumer frontend aktif untuk master tersebut sudah berpindah ke Facility context. Endpoint backend tanpa prefix masih dipertahankan sementara untuk kompatibilitas tes atau integrasi lama; kontraksi dilakukan per resource setelah pencarian consumer dan rollout membuktikan pemakaiannya nol.
 
 Dokumen ini menetapkan lapisan kewenangan User pada deployment satu Grup yang memiliki banyak Faskes. Kontrak database dan Facility context tetap mengikuti [`multi-skema-faskes.md`](./multi-skema-faskes.md).
 
