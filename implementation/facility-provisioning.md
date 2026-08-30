@@ -1,6 +1,6 @@
 # Provisioning Faskes
 
-**Status:** kontrak diterima dan schema gate hijau; command belum diimplementasikan.
+**Status:** command CLI, retry, checkpoint, audit, privilege runtime, dan canary schema penuh selesai.
 
 Prasyarat implementasi command adalah `php artisan facility:schema-plan` berakhir sukses. Prasyarat tersebut terpenuhi pada 29 Agustus 2026 setelah dependency foreign key lintas boundary dilepas; lihat [`multi-schema-facility.md`](./multi-schema-facility.md#hasil-audit-migrasi-29-agustus-2026).
 
@@ -30,7 +30,7 @@ Nama/alamat/kode eksternal tetap dibaca dari PPK. Detail kontak, branding, crede
 
 ## Alur operator
 
-Contoh interface yang dituju:
+Interface operator:
 
 ```bash
 php artisan facility:provision RS-A
@@ -67,6 +67,8 @@ Admin membuat draft
 
 Setiap checkpoint aman dijalankan ulang. `--retry` melanjutkan keadaan yang sudah ada, bukan membuat database baru atau mengulang seed non-idempotent.
 
+Referensi nasional/bersama sudah berada di control DB, sehingga checkpoint `seed` saat ini merupakan no-op eksplisit dan tidak menjalankan seeder lama atau data demo. Seeder facility baru hanya boleh ditambahkan setelah idempotensinya dibuktikan.
+
 ## Status
 
 | Status | Arti | Traffic operasional |
@@ -78,7 +80,7 @@ Setiap checkpoint aman dijalankan ulang. `--retry` melanjutkan keadaan yang suda
 | `active` | Siap digunakan. | Diizinkan sesuai Membership |
 | `suspended` | Dinonaktifkan tanpa menghapus data. | Ditolak |
 
-Hanya satu eksekusi provisioning boleh memegang lock untuk satu Faskes. Eksekusi kedua berhenti dengan pesan yang jelas.
+Hanya satu eksekusi provisioning boleh memegang advisory lock MariaDB untuk satu Faskes. Eksekusi kedua berhenti dengan `FACILITY_PROVISIONING_LOCKED`, dan setiap checkpoint juga memverifikasi fencing token `provisioning_command_id`. Proses `provisioning` yang tidak selesai selama 120 menit dapat diambil alih secara eksplisit memakai `--retry` hanya setelah advisory lock command lama terlepas; batas ini dapat diubah dengan `FACILITY_DB_PROVISIONING_STALE_MINUTES`.
 
 ## Kegagalan dan retry
 
@@ -109,12 +111,24 @@ Provisioner tidak menjalankan `DROP DATABASE` otomatis saat gagal. Operator memp
 ## Batas keamanan
 
 - Credential privileged hanya tersedia pada CLI/CI operator, tidak pada web/queue runtime.
+- `FACILITY_DB_PROVISIONING_CONNECTION` menunjuk akun provisioner, sedangkan `FACILITY_DB_TEMPLATE_CONNECTION=facility-runtime` memakai akun runtime berbeda.
 - Identifier database hanya berasal dari builder internal dan divalidasi allowlist.
 - Command menolak Facility code ambigu, PPK terpakai, atau database yang dimiliki Faskes lain.
 - Secret tidak dicetak ke terminal atau log.
-- Runtime user hanya memiliki privilege data/migrasi yang memang diperlukan; akun provisioning dipisahkan.
+- Runtime user hanya memiliki privilege whitelist `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `EXECUTE`, dan `CREATE TEMPORARY TABLES` pada database Faskes; akun provisioning dipisahkan.
 - Aktivasi tidak otomatis setelah provisioning agar konfigurasi dan otorisasi dapat diperiksa.
 - Semua perubahan status dan percobaan dicatat sebagai audit event.
+
+Konfigurasi minimum deployment:
+
+```dotenv
+FACILITY_DB_PROVISIONING_CONNECTION=mariadb
+FACILITY_DB_TEMPLATE_CONNECTION=facility-runtime
+FACILITY_DB_RUNTIME_USERNAME=simgos_runtime
+FACILITY_DB_RUNTIME_PASSWORD=<secret>
+FACILITY_DB_RUNTIME_GRANT_HOST=%
+FACILITY_DB_PROVISIONING_STALE_MINUTES=120
+```
 
 ## Migrasi dan seed
 
@@ -157,6 +171,8 @@ Halaman detail Faskes cukup menampilkan:
 UI tidak memuat tombol “buat database”, editor SQL, credential privileged, atau output stack trace. Self-service provisioning penuh ditunda karena penambahan Faskes jarang dan risikonya tidak sebanding.
 
 ## Verifikasi implementasi
+
+Canary MariaDB 30 Agustus 2026 menghasilkan status `provisioned`, checkpoint `complete`, 508 migration, satu marker identitas database, dan 10 audit event. Canary dimulai dari kegagalan `grant_runtime`, berhasil melalui `--retry`, lalu pemanggilan ulang selesai idempotent. Health check membuktikan akun runtime dapat read/write sementara tetapi tidak dapat membuat database atau menjatuhkan tabel. Seluruh artefak canary dihapus setelah pemeriksaan.
 
 - Provisioning draft valid menghasilkan tepat satu database.
 - Retry setelah gagal migrasi melanjutkan database yang sama.

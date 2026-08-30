@@ -1,6 +1,6 @@
 # Isolasi Database per Faskes
 
-**Status:** keputusan arsitektur diterima; schema gate dan runtime switch opt-in untuk vertical slice Rawat Jalan sudah teruji, sedangkan command provisioning belum diimplementasikan.
+**Status:** keputusan arsitektur diterima; schema gate, provisioning CLI, dan runtime switch opt-in untuk vertical slice Rawat Jalan sudah teruji.
 
 Dokumen ini adalah kontrak utama untuk Facility context, kepemilikan data, koneksi database, queue, logging, performa, migrasi, dan backup per Faskes. Proses penambahan Faskes dijelaskan lebih rinci di [`facility-provisioning.md`](./facility-provisioning.md).
 
@@ -125,13 +125,13 @@ Jumlah tersebut adalah inventaris awal, bukan status implementasi. Ledger tabel 
 
 ### Hasil audit migrasi 29 Agustus 2026
 
-Validator `php artisan facility:schema-plan` telah mengklasifikasikan 14 modul control dengan 26 migration dan 451 modul facility dengan 508 migration. Tidak ada modul existing yang belum mempunyai owner.
+Validator `php artisan facility:schema-plan` telah mengklasifikasikan 14 modul control dengan 28 migration dan 451 modul facility dengan 508 migration. Tidak ada modul existing yang belum mempunyai owner.
 
-Sebanyak 107 dependency foreign key lintas boundary telah diganti menjadi ID berindeks. Hasil terbaru:
+Sebanyak 110 dependency foreign key lintas boundary telah diganti menjadi ID berindeks. Hasil terbaru:
 
 | Pemeriksaan | Hasil |
 |---|---:|
-| FK migration operasional menuju `users`/`countries` | 0 |
+| FK migration operasional menuju `users`/`countries`/`indonesia_*` | 0 |
 | Modul tanpa owner | 0 |
 | FK internal control DB yang tetap dipertahankan pada development | 3 |
 
@@ -148,7 +148,11 @@ Vertical slice `diagnosis_codes` selesai pada 28 Agustus 2026: model dan validas
 - canary MariaDB nyata membuktikan Faskes A dan B dapat mempunyai `visit.id = 1` dengan isi berbeda; write ke A menghasilkan hitungan `2`, sedangkan B tetap `1`;
 - dua database, record katalog, dan token canary sementara terverifikasi sudah dihapus setelah tes.
 
-Bukti ini menyelesaikan pola runtime untuk slice pertama. `facility:schema-plan` sekarang hijau; provisioning seluruh modul menunggu implementasi command dan canary schema penuh.
+Bukti ini menyelesaikan pola runtime untuk slice pertama. `facility:schema-plan` sekarang hijau.
+
+### Bukti provisioning schema penuh 30 Agustus 2026
+
+Canary CLI nyata memulai dari kegagalan `grant_runtime`, mempertahankan database bertanda identitas, lalu berhasil melalui `facility:provision --retry`. Hasil akhirnya adalah status `provisioned`, checkpoint `complete`, tepat 508 migration facility, health check read/write, serta bukti akun runtime tidak memiliki privilege membuat database atau menjatuhkan tabel. Pemanggilan ulang idempotent dan seluruh database, akun, serta record canary dibersihkan.
 
 ## Routing dan Facility context
 
