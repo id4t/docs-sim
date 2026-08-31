@@ -143,7 +143,7 @@ Sebanyak 110 dependency foreign key lintas boundary telah diganti menjadi ID ber
 | Modul tanpa owner | 0 |
 | FK internal control DB yang tetap dipertahankan pada development | 3 |
 
-Angka dihitung per file migration dan akan berubah saat dependency dipindahkan. Command wajib tetap gagal sampai seluruh foreign key lintas boundary dihilangkan. Detail implementasi berada di [`../../RME-Backend/docs/architecture/migrasi-database-faskes.md`](../../RME-Backend/docs/architecture/migrasi-database-faskes.md).
+Angka dihitung per file migration dan akan berubah saat dependency dipindahkan. Command wajib tetap gagal sampai seluruh foreign key lintas boundary dihilangkan. Detail implementasi berada di [`RME-Backend/docs/architecture/migrasi-database-faskes.md`](../../../RME-Backend/docs/architecture/migrasi-database-faskes.md).
 
 Vertical slice `diagnosis_codes` selesai pada 28 Agustus 2026: model dan validasi dapat memakai koneksi control, query penutupan episode tidak lagi melakukan join lintas database, serta lima FK operasional dilepas tanpa mengubah ID diagnosis existing. Mode satu database tetap menjadi default sampai `CONTROL_DB_CONNECTION=control` diaktifkan saat rollout dua database.
 

@@ -4,7 +4,7 @@
 
 ## Bukti implementasi 30 Agustus 2026
 
-Rekaman verifikasi UI tersedia di [`demo/facility-unit-workspace-demo.webm`](../demo/facility-unit-workspace-demo.webm). Rekaman memakai cursor dan caption langkah demi langkah pada data yang jelas berlabel demo.
+Rekaman verifikasi UI tersedia di [`demo/facility-unit-workspace-demo.webm`](../../demo/facility-unit-workspace-demo.webm). Rekaman memakai cursor dan caption langkah demi langkah pada data yang jelas berlabel demo.
 
 Sudah tersedia:
 

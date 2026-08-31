@@ -1,6 +1,6 @@
 # Integration — E-Klaim dan Episode Klaim BPJS
 
-**Status:** target architecture  
+**Status:** target architecture
 **Referensi eksternal terakhir diaudit:** 2026-08-24
 
 ## Tujuan

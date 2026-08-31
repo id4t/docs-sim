@@ -1,0 +1,563 @@
+kode,nama,tingkat,aktif,kelas_frontend
+10,PENDAFTARAN,1,1,
+1001,"PASIEN BARU",2,1,
+1002,"RAWAT JALAN",2,1,
+1003,"GAWAT DARURAT",2,1,
+1004,"RAWAT INAP",2,1,
+1005,LABORATORIUM,2,1,
+1006,RADIOLOGI,2,1,
+1007,"PERUBAHAN DATA",2,1,
+100701,PASIEN,3,1,
+10070101,"UPDATE STATUS PASIEN",4,1,
+10070102,"UPLOAD PHOTO PASIEN",4,1,
+10070103,"LOCK UNLOCK",4,1,
+100702,"PENJAMIN / CARA PEMBAYARAN",3,1,
+10070201,"SUDAH FINAL TAGIHAN",4,1,
+10070202,"UPDATE SATU EPISODE",4,1,
+100703,TUJUAN,3,1,
+100704,PAKET,3,1,
+100705,"TANGGAL PENDAFTARAN",3,1,
+100706,"HAPUS SEP",3,1,
+100707,"UPLOAD GENERAL CONSENT",3,1,
+1008,PENCETAKAN,2,1,
+100801,BARU,3,1,
+10080101,"KARTU PASIEN",4,1,
+10080102,"BARCODE PASIEN",4,1,
+10080103,"BUKTI PENDAFTARAN",4,1,
+10080104,"BARCODE PENDAFTARAN",4,1,
+10080105,TRACERT,4,1,
+100802,ULANG,3,1,
+10080201,"KARTU PASIEN",4,1,
+10080202,"BARCODE PASIEN",4,1,
+10080203,"BUKTI PENDAFTARAN",4,1,
+10080204,"BARCODE PENDAFTARAN",4,1,
+10080205,TRACERT,4,1,
+1009,HISTORY,2,1,
+100901,PENDAFTARAN,3,1,
+1010,PEMBATALAN,2,1,
+1011,PENERIMAAN,2,1,
+101101,"PENDAFTARAN KELAHIRAN",3,1,
+1012,"TINDAKAN LIST",2,1,
+1013,TRIAGE,2,1,
+1014,"PASIEN TELAH MENINGGAL (FORENSIK)",2,1,
+11,LAYANAN,1,1,
+1101,PENERIMAAN,2,1,
+110101,"PASIEN PENDAFTARAN / KUNJUNGAN",3,1,
+110102,"PASIEN KONSUL",3,1,
+110103,"PASIEN MUTASI",3,1,
+110104,"ORDER LABORATORIUM",3,1,
+110105,"ORDER RADIOLOGI",3,1,
+110106,"RESEP PASIEN",3,1,
+110107,"OTOMATIS TERIMA ORDER LABORATORIUM",3,1,
+110108,"OTOMATIS TERIMA ORDER RADIOLOGI",3,1,
+110109,"OTOMATIS TERIMA RESEP",3,1,
+110110,"PERUBAHAN TANGGAL KUNJUNGAN",3,1,
+110111,"PERUBAHAN DPJP",3,1,
+110112,"TAMBAH ITEM FARMASI",3,1,
+1102,"PENGINPUTAN TINDAKAN / PEMERIKSAAN MEDIS ",2,1,
+110201,VERIFIKASI,4,1,
+110202,"BATAL VERIFIKASI",4,1,
+1103,PENGIRIMAN,2,1,
+110301,"PASIEN KONSUL",3,1,
+110302,"PASIEN MUTASI",3,1,
+110303,"ORDER LABORATORIUM",3,1,
+110304,"ORDER RADIOLOGI",3,1,
+110305,"RESEP PASIEN",3,1,
+1104,"FEEDBACK / UMPAN BALIK",2,1,
+110401,"JAWABAN KONSUL",3,1,
+110402,"PENGINPUTAN HASIL LABORATORIUM",3,1,
+110403,"PENGINPUTAN HASIL RADIOLOGI",3,1,
+1105,PEMBACAAN,2,1,
+110501,"JAWABAN KONSUL",3,1,
+110502,"HASIL LABORATORIUM",3,1,
+110503,"HASIL RADIOLOGI",3,1,
+1106,HISTORY,2,1,
+110601,"PASIEN KUNJUNGAN",3,1,
+110602,"PASIEN KONSUL",3,1,
+110603,"PASIEN MUTASI",3,1,
+110604,"ORDER LABORATORIUM",3,1,
+110605,"ORDER RADIOLOGI",3,1,
+110606,"RESEP PASIEN",3,1,
+110607,"MY PASIEN",3,1,
+1107,PENCETAKAN,2,1,
+1108,PEMBATALAN,2,1,
+110801,"PENERIMAAN / PENGIRIMAN",3,1,
+11080101,"PASIEN PENDAFTARAN / KUNJUNGAN (TUJUAN PASIEN)",4,1,
+11080102,"PASIEN KONSUL",4,1,
+11080103,"PASIEN MUTASI",4,1,
+11080104,"ORDER LABORATORIUM",4,1,
+11080105,"ORDER RADIOLOGI",4,1,
+11080106,"RESEP PASIEN",4,1,
+110802,"PASIEN KUNJUNGAN",3,1,
+110803,"PENGINPUTAN TINDAKAN / PEMERIKSAAN MEDIS ",3,1,
+110804,FINAL,3,1,
+11080401,"ALLOW VALIDASI",4,1,
+1109,"FINAL / SELESAI",2,1,
+110901,"FINAL HASIL",3,1,
+110902,"BATAL FINAL HASIL",3,1,
+1110,KELAHIRAN,2,1,
+1111,"PEMAKAIAN BHP",2,1,
+111101,"PENGINPUTAN BAHAN",3,1,
+111102,"PEMBATALAN PENGINPUTAN",3,1,
+1112,"BON SISA",2,1,
+111201,PELAYANAN,3,1,
+1113,"PEMANGGILAN ANTRIAN DI KUNJUNGAN",2,1,
+1114,"MENU LAYANAN",2,1,
+111416,"LAPORAN OPERASI / TINDAKAN INVASIF",3,1,
+1115,KPO,2,1,
+111501,KPO,3,1,
+111502,"INPUT WAKTU PEMBERIAN",3,1,
+11150201,"FINAL DAN BATAL FINAL INPUT WAKTU PEMBERIAN",4,1,
+1116,"FORMULIR ANTIMIKROBA",2,1,
+111601,"KIRIM FORMULIR ANTIMIKROBA",3,1,
+12,PEMBAYARAN,1,1,
+1201,"FINAL TAGIHAN",2,1,
+1202,"PENERIMAAN UANG MUKA",2,1,
+1203,"PENGEMBALIAN UANG MUKA",2,1,
+1204,PIUTANG,2,1,
+1205,"PELUNASAN PIUTANG",2,1,
+1206,"PEMBAYARAN NON TUNAI",2,1,
+1207,DISKON,2,1,
+1208,"PEMBATALAN TAGIHAN FINAL",2,1,
+1209,"TRANSAKSI KASIR",2,1,
+1211,"BATAL GABUNG TAGIHAN",2,1,
+1212,PENJAMIN,2,1,
+1213,PENCETAKAN,2,1,
+121301,"KUITANSI TAGIHAN",3,1,
+1214,"TRANSAKSI PENJUALAN",2,1,
+121401,"FINAL TAGIHAN PENJUALAN",3,1,
+121402,"PEMBATALAN TAGIHAN PENJUALAN",3,1,
+1215,"PEMBATALAN  PERMINTAAN LAYANAN YG BELUM DITERIMA",2,1,
+13,"REKAM MEDIS",1,1,rekammedis.Workspace
+1301,"PENCETAKAN / LEMBARAN",2,1,
+130101,"RAWAT JALAN",3,1,
+13010101,"MR1 - PENDAFTARAN",4,1,
+130102,"GAWAT DARURAT",3,1,
+13010201,"MR2 - PENGKAJIAN AWAL MEDIS PASIEN",4,1,
+130103,"RAWAT INAP",3,1,
+13010301,"MR1a - PENDAFTARAN",4,1,
+13010302,"MR1 - RINGKASAN MASUK DAN KELUAR",4,1,
+13010303,"MR2 - RESUME MEDIS",4,1,
+1302,ANAMNESIS,2,1,rekammedis.anamnesis.Workspace
+130201,"RIWAYAT PENYAKIT SEKARANG (UMUM)",3,1,rekammedis-anamnesis-umum-workspace
+130202,RIWAYAT,3,1,rekammedis-anamnesis-riwayat-workspace
+13020201,"PENYAKIT DAHULU",4,1,rekammedis-anamnesis-riwayat-perjalananpenyakit-workspace
+13020202,ALERGI,4,1,rekammedis-anamnesis-riwayat-alergi-workspace
+13020203,"PEMBERIAN OBAT",4,1,rekammedis-anamnesis-riwayat-pemberianobat-workspace
+13020204,LAINNYA,4,1,rekammedis-anamnesis-riwayat-lainnya-workspace
+13020205,"FAKTOR RISIKO",4,1,rekammedis-anamnesis-riwayat-faktorrisiko-workspace
+13020206,"PENYAKIT KELUARGA",4,1,rekammedis-anamnesis-riwayat-penyakitkeluarga-workspace
+13020207,TUBERKULOSIS,4,1,rekammedis-anamnesis-riwayat-penyakittb-workspace
+13020208,GINEKOLOGI,4,1,rekammedis-anamnesis-riwayat-gynekologi-workspace
+13020209,"PERAWATAN DAN TINDAKAN",4,1,rekammedis-anamnesis-riwayat-perawatandantindakan-workspace
+13020210,OBSTETRI,4,1,rekammedis-anamnesis-riwayat-obstetri-workspace
+13020211,"IMUNISASI / PEMBERIAN VAKSIN",4,1,rekammedis-anamnesis-riwayat-imunisasivaksin-workspace
+130203,"KELUHAN UTAMA",3,1,rekammedis-anamnesis-keluhan-utama-workspace
+130204,"STATUS FUNGSIONAL",3,1,rekammedis-anamnesis-statusfungsional-workspace
+130205,"HUBUNGAN STATUS PSIKOSOSIAL",3,1,rekammedis-anamnesis-hubunganpsikososial-workspace
+13020501,GENERAL,4,1,rekammedis-anamnesis-hubunganpsikososial-kondisisosial-workspace
+13020502,"END OF LIFE",4,1,rekammedis-anamnesis-hubunganpsikososial-endoflife-workspace
+130206,EDUKASI,3,1,rekammedis-anamnesis-edukasi-workspace
+13020601,"PASIEN & KELUARGA",4,1,rekammedis-anamnesis-edukasi-pasienkeluarga-workspace
+13020602,EMERGENCY,4,1,rekammedis-anamnesis-edukasi-emergency-workspace
+13020603,"INFORMED CONSENT",4,1,rekammedis-anamnesis-edukasi-informedconsent-upload-form
+13020604,"END OF LIFE",4,1,rekammedis-anamnesis-edukasi-endoflife-workspace
+130207,"SKRINING GIZI AWAL",3,1,rekammedis-anamnesis-permasalahangizi-workspace
+13020701,"HITUNG ULANG",4,1,
+13020702,VALIDASI,4,1,
+13020703,"BATAL VALIDASI",4,1,
+130208,BATUK,3,1,rekammedis-anamnesis-batuk-workspace
+130209,DIPEROLEH,3,1,rekammedis-anamnesis-diperoleh-workspace
+130210,"SKRINING ORANG TUA",3,1,rekammedis-anamnesis-skriningorangtua-workspace
+130211,"DISCHARGE PLANNING",3,1,rekammedis-perencanaan-dischargeplanning-skrining-workspace
+1303,PEMERIKSAAN,2,1,rekammedis.pemeriksaan.Workspace
+130301,UMUM,3,1,rekammedis-pemeriksaan-umum-workspace
+13030101,"TANDA VITAL",4,1,rekammedis-pemerikasaan-umum-tandavital-workspace
+13030102,ANTROPOMETRI,4,1,rekammedis-pemeriksaan-umum-nutrisi-workspace
+13030103,FUNGSIONAL,4,1,rekammedis-pemeriksaan-umum-fungsional-workspace
+130302,FISIK,3,1,rekammedis-pemeriksaan-fisik-workspace
+130303,ANATOMI,3,1,rekammedis-pemeriksaan-anatomi-workspace
+13030301,KEPALA,4,1,rekammedis.pemeriksaan.anatomi.kepala.Workspace
+13030302,MATA,4,1,rekammedis.pemeriksaan.anatomi.mata.Workspace
+13030303,TELINGA,4,1,rekammedis.pemeriksaan.anatomi.telinga.Workspace
+13030304,HIDUNG,4,1,rekammedis.pemeriksaan.anatomi.hidung.Workspace
+13030305,RAMBUT,4,1,rekammedis.pemeriksaan.anatomi.rambut.Workspace
+13030306,BIBIR,4,1,rekammedis.pemeriksaan.anatomi.bibir.Workspace
+13030307,"GIGI GELIGI",4,1,rekammedis.pemeriksaan.anatomi.gigi.geligi.Workspace
+13030308,LIDAH,4,1,rekammedis.pemeriksaan.anatomi.lidah.Workspace
+13030309,"LANGIT LANGIT",4,1,rekammedis.pemeriksaan.anatomi.langitlangit.Workspace
+13030310,LEHER,4,1,rekammedis.pemeriksaan.anatomi.leher.Workspace
+13030311,TENGGOROKAN,4,1,rekammedis.pemeriksaan.anatomi.tenggorokan.Workspace
+13030312,TONSIL,4,1,rekammedis.pemeriksaan.anatomi.tonsil.Workspace
+13030313,DADA,4,1,rekammedis.pemeriksaan.anatomi.dada.Workspace
+13030314,PAYUDARA,4,1,rekammedis.pemeriksaan.anatomi.payudara.Workspace
+13030315,PUNGGUNG,4,1,rekammedis.pemeriksaan.anatomi.punggung.Workspace
+13030316,PERUT,4,1,rekammedis.pemeriksaan.anatomi.perut.Workspace
+13030317,GENITAL,4,1,rekammedis.pemeriksaan.anatomi.genital.Workspace
+13030318,ANUS,4,1,rekammedis.pemeriksaan.anatomi.anus.Workspace
+13030319,"LENGAN ATAS",4,1,rekammedis.pemeriksaan.anatomi.lengan.atas.Workspace
+13030320,"LENGAN BAWAH",4,1,rekammedis.pemeriksaan.anatomi.lengan.bawah.Workspace
+13030321,"JARI TANGAN",4,1,rekammedis.pemeriksaan.anatomi.jari.tangan.Workspace
+13030322,"KUKU TANGAN",4,1,rekammedis.pemeriksaan.anatomi.kuku.tangan.Workspace
+13030323,"PERSENDIAN TANGAN",4,1,rekammedis.pemeriksaan.anatomi.persendian.tangan.Workspace
+13030324,"TUNGKAI ATAS",4,1,rekammedis.pemeriksaan.anatomi.tungkai.atas.Workspace
+13030325,"TUNGKAI BAWAH",4,1,rekammedis.pemeriksaan.anatomi.tungkai.bawah.Workspace
+13030326,"JARI KAKI",4,1,rekammedis.pemeriksaan.anatomi.jari.kaki.Workspace
+13030327,"KUKU KAKI",4,1,rekammedis.pemeriksaan.anatomi.kuku.kaki.Workspace
+13030328,"PERSENDIAN KAKI",4,1,rekammedis.pemeriksaan.anatomi.persendian.kaki.Workspace
+13030329,FARING,4,1,rekammedis.pemeriksaan.anatomi.faring.Workspace
+13030330,"SALURAN CERNAH",4,1,rekammedis.pemeriksaan.anatomi.salurancernah.Workspace
+1303033001,BAWAH,5,1,rekammedis-pemeriksaan-anatomi-salurancernah-bawah-workspace
+1303033002,ATAS,5,1,rekammedis-pemeriksaan-anatomi-salurancernah-atas-workspace
+130304,PENUNJANG,3,1,rekammedis-pemeriksaan-penunjang-workspace
+13030401,EEG,4,1,rekammedis.pemeriksaan.penunjang.eeg.Workspace
+130304010,"PRICK TEST - TEST ALERGI",4,1,rekammedis-pemeriksaan-penunjang-pricktest-workspace
+13030402,EMG,4,1,rekammedis.pemeriksaan.penunjang.emg.Workspace
+13030403,"RAVEN TEST",4,1,rekammedis.pemeriksaan.penunjang.raventest.Workspace
+13030404,"ASESSMENT M CHAT",4,1,rekammedis.pemeriksaan.penunjang.asessmentmchat.Workspace
+13030405,EKG,4,1,rekammedis.pemeriksaan.penunjang.ekg.Workspace
+13030406,"CAT CLAMS",4,1,rekammedis.pemeriksaan.penunjang.catclams.Workspace
+13030407,"TRANSFUSI DARAH",4,1,rekammedis.pemeriksaan.penunjang.transfusidarah.Workspace
+1303040701,"CHECKLIST PENERIMAAN",5,1,rekammedis-pemeriksaan-penunjang-transfusidarah-penerimaan-workspace
+1303040702,OBSERVASI,5,1,rekammedis-pemeriksaan-penunjang-transfusidarah-observasi-workspace
+13030408,FIBROSCAN,4,1,rekammedis.pemeriksaan.penunjang.fibroscan.Workspace
+13030409,"PROCEDURE KFR",4,1,rekammedis-pemeriksaan-penunjang-prosedurkfr-workspace
+13030410,"USG GINEKOLOGI",4,1,rekammedis.pemeriksaan.penunjang.usgginekologi.Workspace
+13030411,"TRANSCRANIAL DOPPLER (TCD)",4,1,rekammedis.pemeriksaan.penunjang.tcd.Workspace
+13030412,"USG GUIDING NEUROLOGI",4,1,rekammedis.pemeriksaan.penunjang.usgguiding.Workspace
+13030413,"PROTOKOL INTERVENSI",4,1,rekammedis.pemeriksaan.penunjang.protokolintervensi.Workspace
+1303041301,"BRAIN MAPPING (TMS)",5,1,rekammedis-pemeriksaan-penunjang-protokolintervensi-brainmapping-workspace
+1303041302,BAEP,5,1,rekammedis-pemeriksaan-penunjang-protokolintervensi-baep-workspace
+13030414,"UPLOAD HASIL PEMERIKSAAN MATA",4,1,rekammedis.pemeriksaan.penunjang.uploadhasilpemeriksaanmata.Workspace
+1304,PENILAIAN,2,1,rekammedis.penilaian.Workspace
+130401,FISIK,3,1,rekammedis-penilaian-fisik-workspace
+130402,NYERI,3,1,rekammedis-penilaian-nyeri-workspace
+130403,"STATUS PEDIATRIK",3,1,rekammedis-penilaian-statuspediatric-workspace
+130404,DIAGNOSIS,3,1,rekammedis-penilaian-diagnosis-workspace
+130405,"RISIKO JATUH",3,1,rekammedis-penilaian-risikojatuh-workspace
+13040501,"SKALA MORSE",4,1,rekammedis-penilaian-risikojatuh-skalamorse-workspace
+13040502,"SKALA HUMPTY DUMPY",4,1,rekammedis-penilaian-risikojatuh-skalahumptydumpty-workspace
+13040503,"EDMONSON PSYCHIATRIC FALL RISK ASSESSMENT",4,1,rekammedis-penilaian-risikojatuh-epfra-workspace
+13040504,"GET UP AND GO",4,1,rekammedis-penilaian-risikojatuh-getupandgo-workspace
+130407,DEKUBITUS,3,1,rekammedis-penilaian-dekubitus-workspace
+130408,BARTHEL,3,1,rekammedis-penilaian-barthel-Workspace
+13040801,"BARTHEL INDEX",4,1,rekammedis-penilaian-barthel-barthelindex-workspace
+13040802,"BARTHEL INDEX MODIFIKASI",4,1,rekammedis-penilaian-barthel-barthelindexmodfikasi-workspace
+130409,"BALANCE CAIRAN",3,1,rekammedis-penilaian-ballancecairan-workspace
+130410,KANKER,3,1,rekammedis-penilaian-tumor-workspace
+130411,JANTUNG,3,1,rekammedis-penilaian-jantung-workspace
+13041101,"GRACE RISK SKOR",4,1,rekammedis-penilaian-jantung-graceriskskor-workspace
+13041102,"KILLIP CLASS",4,1,rekammedis-penilaian-jantung-killipclass-workspace
+130412,ANASTESI,3,1,rekammedis-penilaian-anastesi-workspace
+13041201,"PERSIAPAN ANASTESI",4,1,rekammedis-penilaian-anastesi-persiapan-workspace
+13041202,"PRA ANASTESI / SEDASI",4,1,rekammedis-penilaian-anastesi-prasedasi-workspace
+1305,ICD,2,1,rekammedis.icd.Workspace
+130501,GROUPING,3,1,
+13050101,"VERIFIKASI REKAM MEDIS",4,1,
+1305010101,"KEMBALI KE VERIFIKASI RM SEBELUMNYA",5,1,
+13050102,"HAPUS GROUPING",4,1,
+130502,CODING,3,1,
+1306,"PENANDAAN GAMBAR",2,1,rekammedis.penandagambar.Workspace
+1307,PERENCANAAN,2,1,rekammedis.perencanaan.Workspace
+130701,TERAPI,3,1,rekammedis-perencanaan-rencanaterapi-workspace
+130702,KONTROL,3,1,rekammedis-perencanaan-jadwalkontrol-workspace
+130703,"RAWAT INAP (SPRI)",3,1,rekammedis-perencanaan-rawatinap-workspace
+130704,"SURAT SAKIT (DI ALIHKAN KE PENERBITAN SURAT)",3,1,panel
+130705,"DISCHARGE PLANNING",3,0,rekammedis-perencanaan-dischargeplanning-workspace
+13070501,SKRINING,4,0,rekammedis-perencanaan-dischargeplanning-skrining-workspace
+13070502,"FAKTOR RISIKO",4,0,rekammedis-perencanaan-dischargeplanning-faktorrisiko-workspace
+130706,"PERSETUJUAN TINDAKAN DOKTER",3,1,rekammedis-perencanaan-persetujuandokter-workspace
+1308,CPPT,2,1,rekammedis.cppt.Workspace
+130801,"RENCANA PULANG",3,1,
+1309,"PENERBITAN SURAT",2,1,rekammedis.penerbitan.surat.Workspace
+130901,"SURAT SAKIT",3,1,rekammedis-penerbitan-surat-sakit-workspace
+130902,"SURAT KETERANGAN OPNAME",3,1,rekammedis-penerbitan-surat-opname-workspace
+130903,"SURAT KETERANGAN SEHAT",3,1,rekammedis-penerbitan-surat-sehat-workspace
+130904,"SURAT KELAHIRAN",3,1,rekammedis-penerbitan-surat-kelahiran-workspace
+130905,"SURAT HD",3,1,rekammedis-penerbitan-surat-hd-workspace
+130906,"SURAT KEMATIAN",3,1,rekammedis-penerbitan-surat-kematian-workspace
+1310,"RESUME MEDIS",2,1,rekammedis.resume.Workspace
+1311,KEPERAWATAN,2,1,rekammedis.keperawatan.Workspace
+131101,"ASUHAN KEPERAWATAN",3,1,rekammedis-keperawatan-asuhan-workspace
+131102,IMPLEMENTASI,3,1,rekammedis-keperawatan-implementasi-asuhankeperawatan-workspace
+1312,TRIAGE,2,1,rekammedis.triage.Workspace
+1313,"REKONSILIASI OBAT",2,1,rekammedis.rekonsiliasiobat.Workspace
+131301,"REKONSILIASI ADMISI",3,1,rekammedis-rekonsiliasiobat-admisi-workspace
+131302,"REKONSILIASI TRANSFER",3,1,rekammedis-rekonsiliasiobat-transfer-workspace
+131303,"REKONSILIASI DISCHARGE",3,1,rekammedis-rekonsiliasiobat-discharge-workspace
+1314,PEMANTAUAN,2,1,rekammedis.pemantauan.Workspace
+131401,"HD INTRADIALITIK",3,1,rekammedis-pemantauan-hdintradialitik-workspace
+1315,"TINDAKAN / TERAPI",2,1,rekammedis.tindakanterapi.Workspace
+131501,MMPI,3,1,rekammedis.tindakanterapi.mmpi.Workspace
+131502,"ABC I",3,1,rekammedis.tindakanterapi.abci.Workspace
+1316,"HASIL MCU",2,1,rekammedis.hasil.mcu.Workspace
+1317,"FORM REGISTRY SATU SEHAT",2,1,kemkes.satusehat.formregistry.Workspace
+1318,"UPLOAD DOKUMEN",2,1,rekammedis.uploaddocument.Workspace
+1319,"LEMBAR TRANSFER PASIEN",2,1,rekammedis.lembartransferpasien.Workspace
+14,LAPORAN,1,1,laporan.Workspace
+1401,"REKAPITULASI LAPORAN (RL)",2,1,
+1402,PENGUNJUNG,2,1,
+1403,KUNJUNGAN,2,1,
+1404,LAYANAN,2,1,
+1405,"PENERIMAAN KASIR",2,1,
+1406,"JASA PELAYANAN",2,1,
+1407,INVENTORY,2,1,
+1408,"REKAM MEDIS",2,1,
+1409,PENDAPATAN,2,1,
+1410,"KEGIATAN RI & RD",2,1,
+1411,"MONITORING PELAYANAN",2,1,
+1412,"KINERJA DOKTER DAN PERAWAT",2,1,
+15,DASHBOARD,1,1,dashboard.Workspace
+1501,INDIKATOR,2,1,dashboard.indikator.Workspace
+1502,PENGUNJUNG,2,1,dashboard.layanan.pengunjung.Workspace
+1503,KUNJUNGAN,2,1,dashboard.layanan.kunjungan.Workspace
+1504,"RAWAT INAP",2,1,dashboard.layanan.rawatinap.Workspace
+1505,LABORATORIUM,2,1,dashboard.layanan.penunjang.laboratorium.Workspace
+1506,RADIOLOGI,2,1,dashboard.layanan.penunjang.radiologi.Workspace
+1507,"10 KASUS TERBESAR DIAGNOSA",2,1,dashboard.kasus.diagnosa.Workspace
+1508,"10 KASUS TERBESAR INACBG",2,1,dashboard.kasus.diagnosa.inacbg.Workspace
+1509,PENDAPATAN,2,1,dashboard.keuangan.pendapatan.Workspace
+1510,"KLAIM INA-CBG",2,1,dashboard.klaim.inacbg.Workspace
+1511,"WAKTU LAYANAN RAWAT DARURAT",2,1,dashboard-waktulayananrawatdarurat-workspace
+19,MASTER,1,1,master.Workspace
+1901,PPK,2,1,master.ppk.Workspace
+1902,PEGAWAI,2,1,master.pegawai.Workspace
+1903,"MANAJEMEN PENGGUNA",2,1,master.manajemenpengguna.Workspace
+1904,RUANGAN,2,1,master.ruangan.Workspace
+190401,"HANYA MENAMPILKAN",3,1,
+19040101,TAMBAH/EDIT,4,1,
+190402,MAPPING,3,1,
+19040201,DOKTER,4,1,workspace-dokterruangan
+19040202,"SPESIALISASI/SUB. SPESIALISASI",4,1,smf-ruangan-workspace
+19040203,PARAMEDIS,4,1,workspace-perawatruangan
+19040204,STAFF,4,1,workspace-staffruangan
+19040205,KAMAR,4,1,workspace-kamar
+19040206,TINDAKAN,4,1,tindakan-ruangan-workspace
+19040207,BARANG,4,1,barang-ruangan-workspace
+19040208,KELAS,4,1,ruangan-kelas-workspace
+1905,TINDAKAN,2,1,master.tindakan.Workspace
+190501,"HANYA MENAMPILKAN TINDAKAN DAN TARIF",3,1,
+1906,KATEGORI,2,1,master.inventory.kategori.Workspace
+1907,PENYEDIA,2,1,master.penyedia.Workspace
+1908,BARANG,2,1,master.inventory.barang.Workspace
+190801,"HANYA MENAMPILKAN BARANG DAN HARGA",3,1,
+1909,PAKET,2,1,master.paket.Workspace
+1910,"PAKET TINDAKAN FARMASI",2,1,master.pakettindakanfarmasi.Workspace
+1911,"GROUP / JENIS PEMERIKSAAN",2,1,master.group.pemeriksaan.Workspace
+1912,TARIF,2,1,master.tarif.Workspace
+191201,"HANYA MENAMPILKAN TARIF",3,1,
+1913,"MARGIN OBAT",2,1,master.marginpenjaminfarmasi.Workspace
+1914,"PENJAMIN RUANGAN",2,1,master.penjamin.Workspace
+1915,BPJS,2,1,plugins.bpjs.Workspace
+1916,NEGARA,2,1,master.negara.Workspace
+1917,WILAYAH,2,1,master.wilayah.Workspace
+1918,REFERENSI,2,1,master.referensi.Workspace
+1919,KEMENKES,2,1,plugins.kemkes.Workspace
+191901,"RS ONLINE",3,1,
+19190101,"KEMKES - RS ONLINE",4,1,kemkes.rsonline.Workspace
+1919010100,DASHBOARD,5,1,kemkes.rsonline.dashboard.Grid
+1919010101,PASIEN,5,1,kemkes.rsonline.pasien.Workspace
+191901010101,"AMBIL DATA DARI RS ONLINE",6,1,
+191901010102,"TAMBAH DATA",6,1,
+191901010103,"EDIT DATA",6,1,
+191901010104,"KIRIM DATA KE RS ONLINE",6,1,
+1919010102,"KETERSEDIAAN RUANGAN",5,1,kemkes.rsonline.data.tempattidur.Grid
+191901010201,"AMBIL DATA REFERENSI DARI RS ONLINE",6,1,
+191901010202,"AMBIL DATA DARI RS ONLINE",6,1,
+191901010203,"SIMPAN DATA",6,1,
+191901010204,"KIRIM DATA KE RS ONLINE",6,1,
+191901010205,"HAPUS DATA",6,1,
+191901010206,PENGATURAN,6,1,
+1919010103,"KETERSEDIAAN SDM",5,1,kemkes.rsonline.data.kebutuhan.sdm.Grid
+191901010301,"AMBIL DATA REFERENSI DARI RS ONLINE",6,1,
+191901010302,"AMBIL DATA DARI RS ONLINE",6,1,
+191901010303,"SIMPAN DATA",6,1,
+191901010304,"KIRIM DATA KE RS ONLINE",6,1,
+1919010104,"KETERSEDIAAN APD, OBAT & ALKES",5,1,kemkes.rsonline.data.kebutuhan.apd.Grid
+191901010401,"AMBIL DATA REFERENSI DARI RS ONLINE",6,1,
+191901010402,"AMBIL DATA DARI RS ONLINE",6,1,
+191901010403,"SIMPAN DATA",6,1,
+191901010404,"KIRIM DATA KE RS ONLINE",6,1,
+1919010105,"REKAP PASIEN MASUK",5,1,kemkes.rsonline.data.rekappasien.masuk.Grid
+191901010501,"AMBIL DATA DARI RS ONLINE",6,1,
+191901010502,"TAMBAH DATA",6,1,
+191901010503,"EDIT DATA",6,1,
+191901010504,"KIRIM DATA KE RS ONLINE",6,1,
+1919010106,"REKAP PASIEN DIRAWAT KOMORBID",5,1,kemkes.rsonline.data.rekappasien.komorbid.Grid
+191901010601,"AMBIL DATA DARI RS ONLINE",6,1,
+191901010602,"TAMBAH DATA",6,1,
+191901010603,"EDIT DATA",6,1,
+191901010604,"KIRIM DATA KE RS ONLINE",6,1,
+1919010107,"REKAP PASIEN DIRAWAT TANPA KOMORBID",5,1,kemkes.rsonline.data.rekappasien.nonkomorbid.Grid
+191901010701,"AMBIL DATA DARI RS ONLINE",6,1,
+191901010702,"TAMBAH DATA",6,1,
+191901010703,"EDIT DATA",6,1,
+191901010704,"KIRIM DATA KE RS ONLINE",6,1,
+1919010108,"REKAP PASIEN KELUAR",5,1,kemkes.rsonline.data.rekappasien.keluar.Grid
+191901010801,"AMBIL DATA DARI RS ONLINE",6,1,
+191901010802,"TAMBAH DATA",6,1,
+191901010803,"EDIT DATA",6,1,
+191901010804,"KIRIM DATA KE RS ONLINE",6,1,
+191902,SITB,3,1,
+19190201,"PASIEN TB",4,1,plugins.kemkes.sitb.pasien.Workspace
+1919020101,"TERIMA PASIEN TERKONFIRMASI",5,1,
+191904,"KEMKES - SIRS",3,1,kemkes.sirs.Workspace
+19190401,RL,4,1,kemkes.sirs.rl.Workspace
+1919040100,1.2,5,1,kemkes.sirs.rl.1.2.Grid
+1919040101,1.3,5,1,kemkes.sirs.rl.1.3.Grid
+1919040102,2,5,1,kemkes.sirs.rl.2.Grid
+1919040103,3.1,5,1,kemkes.sirs.rl.3.1.Grid
+1919040104,3.2,5,1,kemkes.sirs.rl.3.2.Grid
+1919040105,3.3,5,1,kemkes.sirs.rl.3.3.Grid
+1919040106,3.4,5,1,kemkes.sirs.rl.3.4.Grid
+1919040107,3.5,5,1,kemkes.sirs.rl.3.5.Grid
+1919040108,3.6,5,1,kemkes.sirs.rl.3.6.Grid
+1919040109,3.7,5,1,kemkes.sirs.rl.3.7.Grid
+1919040110,3.8,5,1,kemkes.sirs.rl.3.8.Grid
+1919040111,3.9,5,1,kemkes.sirs.rl.3.9.Grid
+1919040112,3.10,5,1,kemkes.sirs.rl.3.10.Grid
+1919040113,3.11,5,1,kemkes.sirs.rl.3.11.Grid
+1919040114,3.12,5,1,kemkes.sirs.rl.3.12.Grid
+1919040115,3.13,5,1,kemkes.sirs.rl.3.13.Grid
+1919040116,3.13B,5,1,kemkes.sirs.rl.3.13b.Grid
+1919040117,3.14,5,1,kemkes.sirs.rl.3.14.Grid
+1919040118,3.15,5,1,kemkes.sirs.rl.3.15.Grid
+1919040119,4A,5,1,kemkes.sirs.rl.4a.Grid
+1919040120,"4A SEBAB",5,1,kemkes.sirs.rl.4a.sebab.Grid
+1919040121,4B,5,1,kemkes.sirs.rl.4b.Grid
+1919040122,"4B SEBAB",5,1,kemkes.sirs.rl.4b.sebab.Grid
+1919040123,5.1,5,1,kemkes.sirs.rl.5.1.Grid
+1919040124,5.2,5,1,kemkes.sirs.rl.5.2.Grid
+1919040125,5.3,5,1,kemkes.sirs.rl.5.3.Grid
+1919040126,5.4,5,1,kemkes.sirs.rl.5.4.Grid
+191905,"KEMKES - SATUSEHAT",3,1,kemkes.satusehat.Workspace
+19190501,MONITORING,4,1,
+1919050101,ENCOUNTER,5,1,kemkes.satusehat.encounter.monitoring.Workspace
+1919050102,CONDITION,5,1,kemkes.satusehat.condition.monitoring.Workspace
+1919050103,OBSERVATION,5,1,kemkes.satusehat.observation.monitoring.Workspace
+1919050104,PROCEDURE,5,1,kemkes.satusehat.procedure.monitoring.Workspace
+1919050105,COMPOSITION,5,1,kemkes.satusehat.composition.monitoring.Workspace
+1919050106,MEDICATION,5,1,kemkes.satusehat.medication.monitoring.Workspace
+1919050107,"MEDICATION REQUEST",5,1,kemkes.satusehat.medicationrequest.monitoring.Workspace
+1919050108,"MEDICATION DISPANCE",5,1,kemkes.satusehat.medicationdispanse.monitoring.Workspace
+1919050109,"SERVICE REQUEST",5,1,kemkes.satusehat.servicerequest.monitoring.Workspace
+1919050110,SPECIMEN,5,1,kemkes.satusehat.specimen.monitoring.Workspace
+1919050111,"DIAGNOSTIC REPORT",5,1,kemkes.satusehat.diagnosticreport.monitoring.Workspace
+1919050112,ORGANIZATION,5,1,kemkes.satusehat.organization.monitoring.Workspace
+1919050113,LOCATION,5,1,kemkes.satusehat.location.monitoring.Workspace
+1919050114,PRACTISIONER,5,1,kemkes.satusehat.practisioner.monitoring.Workspace
+1919050115,"ALLERGY INTOLERANCE",5,1,kemkes.satusehat.allergyintolerance.monitoring.Workspace
+1919050116,"CLINICAL IMPRESSION",5,1,kemkes.satusehat.clinicalimpression.monitoring.Workspace
+1919050117,COVERAGE,5,1,kemkes.satusehat.coverage.monitoring.Workspace
+1919050118,ACCOUNT,5,1,kemkes.satusehat.account.monitoring.Workspace
+19190502,PENGATURAN,4,1,
+1919050201,SINKRONISASI,5,1,kemkes.satusehat.pengaturan.sinkronisasi.Grid
+1919050202,BARANG,5,1,kemkes.satusehat.pengaturan.mapping.barang.Workspace
+1919050203,REFERENSI,5,1,kemkes.satusehat.codereference.Workspace
+1919050204,TINDAKAN,5,1,kemkes.satusehat.pengaturan.mapping.tindakan.Workspace
+19190503,DASHBOARD,4,1,kemkes.satusehat.dashboard.Workspace
+1920,MAPPING,2,1,master.mapping.Workspace
+1921,PENGATURAN,2,1,aplikasi.pengaturan.Workspace
+192101,INSTANSI,3,1,aplikasi.instansi.Workspace
+1922,"PENJAMIN RUMAH SAKIT",2,1,penjamin.rs.Workspace
+192201,"MAPPING DPJP PENJAMIN & DPJP RS",3,1,penjamin.rs.dpjp.Grid
+1923,"MASTER TEMPLATE ANATOMI",2,1,master.templateanatomi.Workspace
+1924,"REKENING RS",2,1,master.rekening.Workspace
+1925,FARMASI,2,1,master.farmasi.Workspace
+192501,"DEPO LAYANAN",3,1,master.farmasi.DepoLayanan.Workspace
+192502,"FREKUENSI ATURAN RESEP",3,1,master.farmasi.frekuensiaturanresep.Workspace
+192503,"PPN PENJUALAN",3,1,master.farmasi.PpnPenjualan.Workspace
+192504,"RETRIKSI DPJP",3,1,master.farmasi.RetriksiDpjp.Workspace
+192505,"RETRIKSI DIAGNOSA ICD10",3,1,master.farmasi.RetriksiDiagnosa.Workspace
+192506,"RETRIKSI JUMLAH",3,1,master.farmasi.RetriksiJumlah.Workspace
+192507,"RETRIKSI HARI",3,1,master.farmasi.RetriksiHari.Workspace
+192508,"MAPPING FREKUENSI KATEGORI",3,1,master.farmasi.MappingFrekuensiKategori.Workspace
+192509,"MAPPING RETRIKSI ANTIBIOTIK",3,1,master.farmasi.RetriksiAntibiotik.Workspace
+192510,"MAPPING GOLONGAN PENJAMIN",3,1,master.farmasi.MappingGolonganPenjamin.Workspace
+192511,"MAPPING RETRIKSI UNIT ASAL RESEP",3,1,master.farmasi.MappingRetriksiUnitAsal.Workspace
+192512,"RETRIKSI FORMULAIRIUM",3,1,master.farmasi.MappingRetriksiFormularium.Workspace
+1926,"NON PEGAWAI",2,1,master.pegawai.Workspace
+1927,"LAYANAN LAINNYA",2,1,master.layananlainnya.Workspace
+1928,"REKAM MEDIS",2,1,rekammedis.pengaturan.Workspace
+192801,"INDIKATOR ASUHAN KEPERAWATAN",3,1,rekammedis.keperawatan.asuhan.pengaturan.indikator.Workspace
+192802,"DIAGNOSA KEPERAWATAN",3,1,rekammedis.keperawatan.asuhan.pengaturan.diagnosa.Workspace
+192803,"MAPPING DIAGNOSA ASUHAN KEPERAWATAN DAN INDIKATOR",3,1,rekammedis.keperawatan.asuhan.pengaturan.diagnosa.mapping.Workspace
+192804,"MAPPING INTERVENSI DAN INDIKATOR",3,1,rekammedis.keperawatan.asuhan.pengaturan.indikator.intervensi.Workspace
+192805,IMPLEMENTASI,3,1,rekammedis.keperawatan.implementasi.Workspace
+192806,"MAPPING IMPLEMENTASI DAN INDIKATOR",3,1,rekammedis.keperawatan.implementasi.indikatorkeperawatan.Workspace
+20,INFORMASI,1,1,informasi.Workspace
+2001,PENGUNJUNG,2,1,
+200101,"TAMPILKAN IDENTITAS PASIEN",3,1,
+2002,"RUANG TEMPAT TIDUR KOSONG",2,1,
+2003,"PASIEN RAWAT INAP",2,1,
+21,PENJUALAN,1,1,penjualan.Workspace
+2101,"ENTRY ITEM BARANG",2,1,
+22,"TEMPAT TIDUR",1,1,informasi.ruangkamartidur.Workspace
+2201,RESERVASI,2,1,
+2202,"TAMPILKAN IDENTITAS PASIEN",2,1,
+2203,ANTRIAN,2,1,
+220301,PENDAFTARAN,3,1,
+23,INVENTORY,1,1,inventory.Workspace
+2301,PERMINTAAN,2,1,
+2302,PENERIMAAN,2,1,
+2303,PENGIRIMAN,2,1,
+2304,"STOK OPNAME",2,1,
+2305,REKANAN,2,1,
+230501,PENERIMAAN,3,1,
+230502,PENGEMBALIAN,3,1,
+230503,"PEMBATALAN PENERIMAAN",3,1,
+2306,"DISTRIBUSI BARANG",2,1,
+24,"PANEL PENCARIAN",1,1,
+2401,PENCARIAN,2,1,
+240101,PENCARIAN,3,1,
+24010101,PASIEN,4,1,pasien.Pencarian
+24010102,PEGAWAI,4,0,pegawai.Pencarian
+24010103,"BERKAS KLAIM",4,1,berkas.klaim.Pencarian
+2401010301,"TIDAK DI IZINKAN AKSES BERKAS BELUM FINAL",5,1,berkas.klaim.belumfinal.Pencarian
+24010104,"BERKAS KLAIM OBAT",4,1,berkas.klaim.Pencarian
+2401010401,CRUD,5,1,
+25,"INTEGRASI / BRIDGING",1,1,
+2501,BPJS,2,1,
+250103,SEP,3,1,
+25010306,"APROVAL PENGAJUAN",4,1,
+2502,LIS,2,1,lis.Workspace
+250200,"MAPPING PARAMETER HASIL",3,1,lis.mappinghasil.Grid
+250201,"TANPA ORDER CONFIG",3,1,lis.tanpaorderconfig.Form
+250202,"PREFIX PARAMETER",3,1,lis.parameter.prefix.Grid
+250203,HASIL,3,1,lis.hasillog.Grid
+250204,INFORMASI,3,1,lis.info.Grid
+26,MONITORING,1,1,monitoring.Workspace
+2601,"NILAI KRITIS LABORATORIUM",2,1,monitoring.nilaikritis.Workspace
+2602,"HASIL LABORATORIUM",2,1,monitoring.lab.Workspace
+260201,"UPDATE STATUS MONITORING LABORATORIUM",3,1,
+260202,"TAMPILKAN DATA BELUM FINAL HASIL",3,1,
+2603,"HASIL RADIOLOGI",2,1,monitoring.rad.Workspace
+260301,"UPDATE STATUS MONITORING RADIOLOGI",3,1,
+260302,"TAMPILKAN DATA BELUM FINAL HASIL",3,1,
+2604,"KONSUL MPP",2,1,monitoring.dischargeplanning.Workspace
+260401,"TAMBAH DATA IMPLEMENTASI",3,1,
+260402,"HAPUS DATA IMPLEMENTASI",3,1,
+2605,"JADWAL KONTROL",2,1,monitoring.jadwalkontrol.Workspace
+260501,"PEMBATALAN JADWAL KONTROL",3,1,
+260502,"MENAMPILKAN TOMBOL DAFTAR HISTORI KUNJUNGAN (SEP)",3,1,
+2606,"SURAT PERENCANAAN RAWAT INAP (SPRI)",2,1,monitoring.rencanarawatinap.Workspace
+2607,"PASIEN DIRAWAT (SIKEPO)",2,1,monitoring.sikepo.Workspace
+2608,"PASIEN MENINGGAL",2,1,monitoring.pasienmeninggal.Workspace
+2609,"STATUS KLAIM DARI BPJS",2,1,plugins.bpjs.monitoring.klaim.Grid
+2690,"DB SESSION",2,1,monitoring.db.session.Grid
+269001,KILL,3,1,
+27,"AKSES API",1,1,
+2701,PEGAWAI,2,1,
+2702,PENGGUNA,2,1,
+2703,"GROUP JENIS PEMERIKSAAN ",2,1,
+28,LOGS,1,1,logs.Workspace
+2801,TTE,2,1,logs.tte.Grid
+29,"PELAYANAN KPO",1,1,layanan.kpo.farmasi.Workspace
+30,BERKAS,1,1,
+3001,KLAIM,2,1,
+300101,"DAFTAR DOKUMEN",3,1,
+300102,"LIHAT CPPT",3,1,
+300103,"HANYA LIHAT SAJA",3,1,
+300104,"LIHAT RIWAYAT KONSUL",3,1,
+3002,"MONITORING KELENGKAPAN BERKAS KLAIM",2,1,berkas.klaim.kelengkapan.Workspace
+300201,"UPDATE STATUS KELENGKAPAN BERKAS",3,1,

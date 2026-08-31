@@ -1,84 +1,95 @@
-# Rencana Pengembangan — SIMGOS
+# Rencana Pengembangan SIMGOS
 
-Dokumen ini adalah satu-satunya sumber status delivery. Jangan menyalin jumlah modul selesai ke PRD, workflow, atau catatan lain.
+Dokumen ini adalah satu-satunya sumber status delivery. Katalog modul menjelaskan cakupan; file ini mencatat bukti kematangan implementasi pada baseline branch senior.
 
 ## Status maturity
 
 | Status | Arti |
 |---|---|
-| `scaffolded` | Route, tabel, atau placeholder tersedia; belum menyelesaikan tugas pengguna. |
+| `unverified` | Keberadaan kode belum diperiksa terhadap blueprint aktif. |
+| `scaffolded` | Route, tabel, atau placeholder tersedia; tugas pengguna belum selesai. |
 | `implemented` | Fungsi lokal berjalan dengan validasi dasar. |
 | `workflow-integrated` | Terhubung ke langkah sebelum/sesudah, state, permission, dan audit. |
-| `integration-tested` | Happy path dan failure path lintas domain lolos pada environment representatif. |
-| `operationally-validated` | Petugas terkait telah memvalidasi SOP dan usability. |
-| `production-ready` | Security, observability, recovery, performance, runbook, dan acceptance go-live terpenuhi. |
+| `integration-tested` | Happy path dan failure path lintas domain lulus. |
+| `operationally-validated` | Petugas memvalidasi SOP dan usability melalui UAT. |
+| `production-ready` | Seluruh gate keamanan, recovery, performa, observability, dan go-live lulus. |
 
-Maturity dicatat per capability/journey, bukan per folder backend atau halaman frontend.
+Status awal seluruh capability adalah `unverified` sampai audit baseline branch senior selesai. Pekerjaan dari branch eksperimen multi-faskes tidak dihitung otomatis.
 
-## Gate 0 — Fondasi arsitektur
+## Gelombang 0 — Fondasi
 
-**Status:** `scaffolded`
+**Status:** `unverified`
 
-**Kemajuan teknis terukur:** 23 dari 41 checklist fondasi rinci selesai (56%) pada 30 Agustus 2026; lihat [`implementation/fondasi-awal.md`](./implementation/fondasi-awal.md). Angka ini bukan persentase production-ready.
+- [ ] satu profil Faskes, satu PPK internal, satu database operasional;
+- [ ] hierarki Ruangan dan Tempat Tidur;
+- [ ] Pengguna, Role, Profesi, Akses Ruangan, MFA, break-glass;
+- [ ] state machine, command final/batal/amend/reversal;
+- [ ] sequence, idempotency, transaction, dan locking;
+- [ ] audit, outbox, Submission, retry, dead letter, rekonsiliasi;
+- [ ] credential terenkripsi dalam database;
+- [ ] observability, backup/restore, migration, dan test harness journey.
 
-- [ ] Facility context tepercaya dan isolasi database per Faskes.
-- [ ] Membership, role/profesi, Ruangan, dan policy aksi backend.
-- [ ] Sequence dokumen concurrency-safe.
-- [ ] State machine Kunjungan, hasil, Tagihan, klaim, dan Submission.
-- [ ] Finalisasi serta amendment/cancellation service lintas modul.
-- [ ] Transactional outbox, idempotency, retry, dead-letter, monitoring.
-- [ ] Audit event yang konsisten dan redaction data sensitif.
-- [ ] Test harness journey lintas modul.
+Exit criteria rinci: [`implementation/fondasi-awal.md`](./implementation/fondasi-awal.md).
 
-## Slice 1 — Rawat Jalan BPJS/FKRTL
+## Gelombang 1 — Rawat Jalan BPJS
 
-**Status:** `scaffolded`
+**Status:** `unverified`
+
+- [ ] pasien baru/lama, duplicate warning, NRM, dan check-in;
+- [ ] Pendaftaran rawat jalan, Coverage, rujukan/kontrol, SEP;
+- [ ] penerimaan poli dan workspace pasien;
+- [ ] TTV, anamnesis, pemeriksaan, diagnosis, tindakan, rencana, resep;
+- [ ] Final Rekam Medis dan Final Layanan terpisah;
+- [ ] ItemTagihan, alokasi Penjamin, Final Tagihan, Sesi Kasir, Pembayaran;
+- [ ] coding/grouping, Episode Klaim, readiness dan berkas minimum;
+- [ ] SATUSEHAT rawat jalan dan monitoring error;
+- [ ] happy path, duplicate, timeout, koreksi, retry, dan recovery test;
+- [ ] UAT pendaftaran, klinis, farmasi, kasir, serta casemix.
 
 Acceptance journey: [`workflows/rawat-jalan-bpjs.md`](./workflows/rawat-jalan-bpjs.md).
 
-- [ ] Pasien, NRM, appointment/Antrean Online, dan arrival.
-- [ ] Eligibilitas, rujukan, Coverage, SEP, dan traceability ke Kunjungan.
-- [ ] Encounter Workspace adaptif untuk dokter/perawat.
-- [ ] Asesmen, diagnosis, tindakan, order sederhana, resep, dan dispensing.
-- [ ] Final RM/Kunjungan dengan server-side lock dan amendment.
-- [ ] Tagihan, alokasi Penjamin, final tagihan, sesi kasir, dan Pembayaran.
-- [ ] Coding ICD-10/ICD-9, grouping, Episode Klaim, dan berkas minimum.
-- [ ] SATUSEHAT minimum rawat jalan dengan mapping, dependency, dan monitoring.
-- [ ] End-to-end tests termasuk timeout, duplikasi, koreksi, dan retry.
-- [ ] Validasi petugas pendaftaran, klinis, farmasi, kasir, dan casemix.
+## Gelombang 2 — IGD, Rawat Inap, Penunjang, dan Farmasi
 
-## Slice 2 — Penunjang diagnostik
+**Status:** `unverified`
 
-**Status:** `scaffolded`
+- [ ] triase dan alur darurat;
+- [ ] admisi, antrean/reservasi bed, penempatan, mutasi, dan discharge;
+- [ ] order–penerimaan–hasil lab/radiologi beserta amendment;
+- [ ] resep–telaah–dispensing–retur dan rekonsiliasi obat;
+- [ ] inventory dasar dan ledger stok;
+- [ ] resume, transfer, kelahiran, kematian, serta dokumen klinis;
+- [ ] billing/klaim IGD dan rawat inap;
+- [ ] Aplicares dan SATUSEHAT resource lanjutan.
 
-Lab/radiologi dari order sampai hasil final/amended, terminology mapping, ServiceRequest/Specimen/Observation/DiagnosticReport/ImagingStudy, billing, dan klaim.
+## Gelombang 3 — Operasional dan Kepatuhan Lengkap
 
-## Slice 3 — Rawat inap BPJS
+**Status:** `unverified`
 
-**Status:** `scaffolded`
+- [ ] inventory lanjutan, opname, distribusi, supplier;
+- [ ] deposit, piutang, diskon, non-tunai, dan laporan kas;
+- [ ] berkas/readiness klaim, dispute, approval, dan rekonsiliasi;
+- [ ] RL/SIRS serta laporan operasional;
+- [ ] dashboard dan drill-down tanpa source of truth baru;
+- [ ] document storage, template, TTE, retensi, dan audit;
+- [ ] monitoring teknis serta runbook production.
 
-Admisi, bed queue/reservation, mutasi, DPJP, medication administration, discharge planning, resume, LOS, SEP rawat inap, Aplicares, grouping, dan klaim.
+## Gelombang 4 — Plugin dan Adapter Tambahan
 
-## Slice 4 — IGD
+**Status:** `unverified`
 
-**Status:** `scaffolded`
+Kandidat: LIS vendor, CSSD, laundry, gizi, PPI, mutu, risk register, MSDM, penjadwalan operasi, distribusi berkas RM, PCare/FKTP, Sisrute, SITB, dan integrasi Kemenkes lain. Capability hanya masuk sprint jika ada kebutuhan instalasi, SOP, owner, dependency, dan acceptance.
 
-Arrival darurat, triase, penanganan tanpa menunggu administrasi normal, kasus kecelakaan, transfer/pulang/admisi, dan rekonsiliasi eligibility.
+## Gate sebelum berpindah gelombang
 
-## Slice 5 — FKTP/klinik
+Gelombang berikutnya boleh dimulai secara terbatas hanya jika contract dependency sudah stabil. Penyelesaian gelombang membutuhkan:
 
-**Status:** `scaffolded`
+- journey utama lulus end-to-end;
+- tidak ada pelanggaran ownership data;
+- migration dan rollback diuji;
+- error dapat ditindak melalui worklist/monitoring;
+- performa pada beban target lulus;
+- UAT aktor terkait selesai.
 
-Capability profile FKTP, PCare, workflow klinik, rujukan ke FKRTL, serta subset SATUSEHAT yang berlaku. Core dipakai ulang tanpa memaksakan konsep SEP/E-Klaim FKRTL.
+## Cara memperbarui status
 
-## Pekerjaan ditunda
-
-- Menambah halaman berdasarkan urutan commit modul backend.
-- Menghitung folder/controller sebagai progres produk.
-- Multi-Grup dalam satu deployment.
-- Master Patient Index lintas Faskes.
-- Fitur granular yang tidak dibutuhkan slice aktif, kecuali untuk keamanan atau fondasi.
-
-## Cara memperbarui
-
-Perubahan status membutuhkan bukti: test, environment, kontrak eksternal, validator, dan tanggal. Gunakan catatan singkat di bawah item terkait; jangan mengubah status berdasarkan estimasi subjektif.
+Setiap perubahan maturity mencatat capability, status lama/baru, bukti test/UAT, environment, tanggal, dan reviewer. Jangan memakai persentase berdasarkan jumlah folder, endpoint, atau halaman.

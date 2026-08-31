@@ -15,7 +15,7 @@ SIMGOS mempertahankan istilah, urutan tugas, dan mental model SIMpel, tetapi tid
 
 Navigasi utama berangkat dari pekerjaan, bukan katalog tabel:
 
-- **Worklist:** antrean tugas menurut Faskes, Ruangan, profesi, dan status.
+- **Worklist:** antrean tugas menurut Ruangan, profesi, dan status.
 - **Encounter Workspace:** satu konteks pasien/kunjungan untuk pekerjaan klinis dan administratif.
 - **Task Workspace:** farmasi, lab, radiologi, kasir, coding, dan klaim memiliki worklist khusus tetapi membuka episode yang sama.
 - **Monitoring:** kegagalan integrasi dan kelengkapan menampilkan tindakan pemulihan.
@@ -27,7 +27,7 @@ Katalog modul boleh tersedia untuk administrasi dan transisi dari SIMpel, tetapi
 
 ```text
 ┌────────────────────────────────────────────────────────────┐
-│ Pasien · NRM · Faskes · Ruangan · DPJP · Status · Penjamin │
+│ Pasien · NRM · Ruangan · DPJP · Status · Penjamin          │
 │ SEP · alergi/peringatan · waktu pelayanan                  │
 ├────────────────────────────────────────────────────────────┤
 │ Kelengkapan: [asesmen] [diagnosis] [order] [resume] [sync] │
@@ -41,7 +41,7 @@ Katalog modul boleh tersedia untuk administrasi dan transisi dari SIMpel, tetapi
 
 Workspace tidak menampilkan semua tab kepada semua pengguna. Visibility dan editability ditentukan bersama oleh:
 
-- Faskes aktif dan capability profile;
+- capability profile instalasi;
 - Ruangan aktif;
 - profesi/role dan permission aksi;
 - jenis serta state Kunjungan;
@@ -49,6 +49,28 @@ Workspace tidak menampilkan semua tab kepada semua pengguna. Visibility dan edit
 - final/locked state record.
 
 Menyembunyikan tombol bukan kontrol keamanan; backend tetap menolak aksi yang tidak sah.
+
+## Form dan kepadatan informasi
+
+- Tampilkan field wajib dan paling sering dipakai terlebih dahulu.
+- Letakkan detail opsional pada bagian yang dapat dibuka tanpa menyembunyikannya permanen.
+- Jangan memakai default klinis hanya untuk mempercepat input bila nilainya belum benar-benar diketahui.
+- Form panjang menyimpan draft dan menampilkan indikator perubahan; draft tidak pernah dianggap final otomatis.
+- Finalisasi adalah aksi sadar dengan validasi, ringkasan dampak, dan konfirmasi.
+
+## Worklist dan pencarian
+
+- Pencarian Pasien, NRM, nomor Pendaftaran, dan identifier penting tersedia dari entry point yang konsisten.
+- Worklist memakai server-side pagination, search, dan filter tanggal, Ruangan, dokter, status, serta Penjamin sesuai domain.
+- Filter penting dapat disimpan per pengguna.
+- Hasil pencarian hanya menampilkan data yang diizinkan oleh permission dan Akses Ruangan.
+
+## Aksesibilitas
+
+- Seluruh input mempunyai label dan error yang dapat diasosiasikan oleh assistive technology.
+- Navigasi keyboard, urutan fokus, kontras, serta target sentuh tablet harus dapat digunakan.
+- Warna tidak menjadi satu-satunya penanda status.
+- Display publik memakai layout dan masking khusus, bukan workspace klinis dengan akun berprivilege tinggi.
 
 ## State UX
 

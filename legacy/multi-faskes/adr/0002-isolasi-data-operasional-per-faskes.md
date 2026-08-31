@@ -10,4 +10,4 @@ Database bersama dengan `tenant_id` di setiap tabel ditolak untuk fase awal kare
 
 Faskes dipilih melalui prefix route, lalu backend memvalidasi Membership dan me-resolve nama database dari control DB. Runtime web tidak memiliki privilege membuat database. Admin membuat draft lewat UI dan operator menjalankan provisioning idempotent melalui CLI.
 
-Kontrak lengkap berada di [`../implementation/multi-skema-faskes.md`](../implementation/multi-skema-faskes.md) dan [`../implementation/penyiapan-faskes.md`](../implementation/penyiapan-faskes.md).
+Kontrak historis berada di [`../multi-skema-faskes.md`](../multi-skema-faskes.md) dan [`../penyiapan-faskes.md`](../penyiapan-faskes.md).

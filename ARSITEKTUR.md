@@ -7,39 +7,32 @@ SIMGOS menggunakan modular monolith: modul dibangun dan dirilis sebagai satu pro
 Arsitektur target:
 
 ```text
-Satu repository dan build pipeline
-├── Grup A — deployment/server A
-│   ├── simgos_control
-│   ├── Faskes A1 — database operasional A1
-│   └── Faskes A2 — database operasional A2
-└── Grup B — deployment/server B
-    ├── simgos_control
-    └── Faskes B1 — database operasional B1
+Satu codebase dan build pipeline
+└── Satu instalasi Faskes
+    ├── frontend pada /
+    ├── backend pada /api
+    ├── satu database MariaDB
+    ├── worker queue dan scheduler
+    └── konfigurasi integrasi terenkripsi
 ```
 
-Grup adalah deployment boundary. Faskes adalah data, identity, configuration, and integration boundary.
+Faskes adalah deployment, data, identity, configuration, and integration boundary. Tidak ada facility context lintas runtime pada target aktif.
 
-Satu Grup memakai satu instance MariaDB: satu control DB dan satu database operasional per Faskes. Batas awal adalah 10 Faskes aktif per Grup dan dinaikkan hanya setelah load test. Seluruh Faskes memakai satu domain utama dengan route `/f/{facility_code}` dan API `/api/v1/f/{facility_code}`.
+## Batas instalasi
 
-## Isolasi Faskes
+Setiap instalasi mempunyai sendiri:
 
-Setiap Faskes mempunyai sendiri:
-
-- pasien lokal dan Nomor Rekam Medis;
+- pasien dan Nomor Rekam Medis;
 - Pendaftaran, Kunjungan, rekam medis, Tagihan, Pembayaran, dan Episode Klaim;
-- pegawai, Membership, role, Unit Layanan, tarif, stok, rekening, dan sequence dokumen;
+- pegawai, akun pengguna, role, Unit Layanan, tarif, stok, rekening, dan sequence dokumen;
 - kode BPJS/Kemenkes, Organization/Location SATUSEHAT, endpoint, credential, serta scheduler;
 - audit trail dan kebijakan retensi.
 
-Request wajib mempunyai facility context yang berasal dari route lalu divalidasi terhadap Membership atau pengecualian aktor global yang eksplisit, bukan `facility_id` bebas dari payload atau satu pilihan global di session. Semua query dan job harus berjalan dalam scope Faskes. Tes isolasi wajib membuktikan identitas dari Faskes A tidak dapat membaca atau menulis data Faskes B. Detail kewenangan berada di [`implementation/keanggotaan-dan-akses.md`](./implementation/keanggotaan-dan-akses.md).
-
-Faskes baru dibuat sebagai draft oleh Admin Grup. Operator menjalankan provisioning database dan migrasi lewat CLI; runtime web tidak memiliki privilege `CREATE DATABASE`. Kontrak lengkap berada di [`implementation/multi-skema-faskes.md`](./implementation/multi-skema-faskes.md) dan [`implementation/penyiapan-faskes.md`](./implementation/penyiapan-faskes.md).
-
-Master Patient Index lintas Faskes adalah capability terpisah pada fase lanjutan. MPI tidak memberi izin otomatis untuk berbagi rekam medis atau transaksi.
+Semua query dan job berjalan dalam satu boundary instalasi. Isolasi yang wajib dijaga saat ini adalah antar domain, antar role, antar unit layanan, dan antar lingkungan deployment.
 
 ## Bounded contexts
 
-- **Identity & Facility:** Grup, Faskes, Membership, role, Unit Layanan, credential, capability profile.
+- **Identity & Access:** user, role, profesi, akses ruangan/unit, credential aplikasi.
 - **Patient Administration:** pasien lokal, Pendaftaran, antrean, rujukan, Coverage, SEP.
 - **Clinical Encounter:** Kunjungan, Encounter, asesmen, diagnosis, tindakan, order, hasil, resep, resume, finalisasi.
 - **Pharmacy & Inventory:** katalog, stok, dispensing, retur, pergerakan barang.
@@ -72,17 +65,17 @@ Response BPJS atau SATUSEHAT bukan source of truth rekam medis internal. Sistem 
 
 ## Integrasi eksternal
 
-Antrean Online, VClaim, E-Klaim, Aplicares, ICare, dan SATUSEHAT adalah adapter terpisah yang dihubungkan oleh ID internal Kunjungan/Coverage/Episode Klaim. Setiap adapter memiliki konfigurasi per Faskes, versioned contract, timeout, retry policy, rate limit, redaction, audit, dan health status.
+Antrean Online, VClaim, E-Klaim, Aplicares, ICare, dan SATUSEHAT adalah adapter terpisah yang dihubungkan oleh ID internal Kunjungan/Coverage/Episode Klaim. Setiap adapter memiliki konfigurasi instalasi tunggal, versioned contract, timeout, retry policy, rate limit, redaction, audit, dan health status. Credential berupa ciphertext di database agar dapat dirotasi melalui UI; master encryption key tetap berada pada environment server.
 
 Pengiriman asynchronous menggunakan transactional outbox. Worker melakukan claim/lease record, exponential backoff, batas percobaan, dead-letter/manual resolution, dan idempotent reconciliation. POST versus PUT ditentukan oleh keberadaan remote ID yang tervalidasi.
 
 ## Capability profile
 
-Core tidak mengasumsikan semua Faskes memakai integrasi sama:
+Core tidak mengasumsikan semua instalasi memakai integrasi sama:
 
 - `FKRTL_BPJS`: Antrean Online, VClaim, E-Klaim, Aplicares/ICare sesuai layanan.
 - `FKTP_BPJS`: PCare dan workflow FKTP pada slice terpisah.
 - `SATUSEHAT`: resource pipeline sesuai layanan yang diaktifkan.
-- `RAWAT_INAP`, `IGD`, `LAB`, `RAD`, `FARMASI`: capability klinis/operasional per Faskes.
+- `RAWAT_INAP`, `IGD`, `LAB`, `RAD`, `FARMASI`: capability klinis/operasional per instalasi.
 
 Capability mengendalikan konfigurasi dan workflow yang tersedia, bukan menggantikan permission pengguna.

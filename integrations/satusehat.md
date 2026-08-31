@@ -1,7 +1,7 @@
 # Integration — SATUSEHAT
 
-**Status:** target architecture  
-**Scope awal:** resource minimum Rawat Jalan sesuai playbook resmi yang berlaku  
+**Status:** target architecture
+**Scope awal:** resource minimum Rawat Jalan sesuai playbook resmi yang berlaku
 **Referensi eksternal terakhir diaudit:** 2026-08-24
 
 ## Prinsip

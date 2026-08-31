@@ -1,69 +1,49 @@
 # Backlog Implementasi Fondasi Awal
 
-Dokumen ini memecah Gate 0 di [`../RENCANA-PENGEMBANGAN.md`](../RENCANA-PENGEMBANGAN.md) menjadi urutan engineering. Status produk tetap hanya diperbarui di Roadmap; checklist ini adalah urutan kerja teknis.
+Dokumen ini memecah Gelombang 0 pada [`../RENCANA-PENGEMBANGAN.md`](../RENCANA-PENGEMBANGAN.md). Status implementasi harus dibuktikan kembali terhadap baseline branch senior; pekerjaan dari eksperimen multi-faskes tidak otomatis dianggap selesai.
 
-## 1. Lifecycle Kunjungan
+## 1. Instalasi dan organisasi
 
-- [x] Sediakan module dengan interface kecil untuk finalisasi dan penulisan klinis terjaga.
-- [x] Pindahkan finalisasi dari generic update ke command endpoint eksplisit.
-- [x] Gunakan transaction dan row lock saat finalisasi serta penulisan klinis.
-- [x] Tolak update, delete, CPPT, dan diagnosis setelah final.
-- [x] Terapkan guard pada tindakan, keluhan utama, anamnesis, TTV, pemeriksaan umum/fisik, rencana terapi, resume, resep, serta pembuatan order lab/radiologi.
-- [x] Tolak finalisasi jika order lab atau radiologi belum berada pada status terminal.
-- [x] Lindungi item resep, item order, petugas tindakan, serta hasil lab/radiologi setelah final.
-- [ ] Definisikan amendment hasil final sebagai command terpisah dengan reason dan provenance.
-- [ ] Definisikan amendment/batal-final dengan reason, authorization, dan audit.
+- [ ] Terapkan satu profil Faskes dan satu PPK internal.
+- [ ] Gunakan satu koneksi database MariaDB untuk seluruh modul instalasi.
+- [ ] Hapus kebutuhan facility route context, runtime database switching, dan provisioning multi-faskes dari jalur aktif.
+- [ ] Bentuk hierarki Ruangan dan Tempat Tidur sebagai child terpisah.
 
-Catatan: perubahan status/hasil order lab dan radiologi belum diblok setelah final karena amendment hasil membutuhkan lifecycle tersendiri. Pembuatan order baru sudah diblok dan finalisasi kini menolak order non-terminal.
+## 2. Identitas dan authorization
 
-## 2. Authorization
+- [ ] Terapkan Pengguna, Role, Profesi, permission aksi, dan Akses Ruangan.
+- [ ] Tambahkan policy untuk admit, record, verify, finalize, amend, bill, code, submit, dan administrasi.
+- [ ] Sediakan MFA untuk superadmin/developer dan break-glass beralasan.
+- [ ] Tambahkan matrix test role × Ruangan × Profesi × aksi.
 
-- [x] Definisikan Membership User–Faskes–role–Unit Layanan dan profesi sesuai [`keanggotaan-dan-akses.md`](./keanggotaan-dan-akses.md).
-- [ ] Tambahkan policy untuk admit, record, verify, finalize, amend, bill, code, dan submit.
-- [ ] Hapus `authorize(): true` dari command sensitif.
-- [ ] Tambahkan matrix test role, Ruangan, assignment, dan cross-Faskes denial.
+## 3. Lifecycle dan transaction safety
 
-## 3. Facility isolation
+- [ ] Buat command eksplisit untuk final, batal, reopen, amendment, dan reversal.
+- [ ] Lindungi generator nomor dengan sequence/unique constraint concurrency-safe.
+- [ ] Gunakan transaction dan locking untuk Tagihan, Pembayaran, stok, serta finalisasi.
+- [ ] Wajibkan idempotency key pada command yang dapat diulang.
+- [ ] Uji konflik paralel pada MariaDB, bukan hanya SQLite.
 
-- [x] Pilih database-per-Faskes pada satu instance MariaDB Grup sesuai [`multi-skema-faskes.md`](./multi-skema-faskes.md).
-- [x] Implementasikan katalog dan draft UI Faskes yang mengacu ke satu PPK internal.
-- [x] Tambahkan validator ownership migration yang memblokir FK operasional menuju control DB.
-- [x] Hilangkan dependency lintas database yang dilaporkan `facility:schema-plan`.
-- [x] Implementasikan provisioning/retry CLI sesuai [`penyiapan-faskes.md`](./penyiapan-faskes.md).
-- [x] Turunkan facility context HTTP dari route dan validasi Membership tepercaya pada vertical slice Rawat Jalan pertama; jangan memakai pilihan session global.
-- [ ] Perluas scope HTTP ke seluruh modul serta scope queue, scheduler, cache key, storage path, dan sequence.
-- [x] Tambahkan test dua Faskes untuk read, route binding, write isolation, dan cleanup koneksi pada vertical slice Rawat Jalan.
-- [ ] Perluas bukti cross-read/write ke seluruh modul setelah provisioning schema penuh lolos gate.
+## 4. Integrasi dan audit
 
-## 4. Transaction safety
+- [ ] Buat transactional outbox dan Submission lifecycle.
+- [ ] Terapkan worker lease, batch, backoff, max attempts, dead letter, dan rekonsiliasi.
+- [ ] Simpan attempt history dengan redaction dan correlation ID.
+- [ ] Simpan credential terenkripsi di database dengan master key dari environment.
+- [ ] Terapkan audit append-only pada klinis, finansial, akses, konfigurasi, dan integrasi.
 
-- [x] Ganti generator nomor Payment dengan sequence tahunan atomik yang mengadopsi nomor legacy/manual.
-- [ ] Ganti generator `count()+1` lain sesuai prioritas vertical slice; jangan menganggap sequence Payment menyelesaikan seluruh nomor dokumen.
-- [x] Bungkus Payment, InvoiceItem, dan total recalculation dalam transaction serta row lock Tagihan.
-- [x] Implementasikan lifecycle buka/tutup Sesi Kasir dengan satu sesi aktif per master Kasir.
-- [x] Pindahkan penguncian Tagihan dari efek samping pembayaran ke command Final Tagihan eksplisit.
-- [x] Final Tagihan memeriksa Kunjungan final, pembayaran cukup, Sesi Kasir aktif, serta mencatat aktor dan waktu secara atomik.
-- [ ] Lengkapi precondition Final Tagihan SIMPel yang belum tercakup: policy kasir/supervisor, seluruh jenis order pending, serta konfigurasi privilege terkait.
-- [ ] Implementasikan pembatalan Final Tagihan sebagai lifecycle reversal beralasan; jangan memakai pembatalan invoice biasa untuk membuka record final.
-- [x] Serialisasikan ledger/saldo stok Ruangan dan fulfillment StockRequest dengan transaction serta row lock.
-- [ ] Amankan mutasi stok gudang lain, termasuk GoodsReceipt dan adjustment langsung InventoryItem.
-- [x] Wajibkan idempotency key pada command Payment dan pertahankan key yang sama saat UI melakukan retry.
-- [ ] Tambahkan version/idempotency guard pada command finansial prioritas lain.
-- [x] Uji rollback atomik, retry Payment, reuse key yang konflik, numbering berurutan, dan retry fulfillment stok.
-- [ ] Uji concurrency nyata pada database target untuk Payment, numbering, dan stock movement; SQLite test tidak membuktikan perilaku row lock production.
+## 5. Operasional
 
-## 5. Outbox dan integration operations
+- [ ] Sediakan health check, metric, log terstruktur, queue monitor, dan slow-query monitor.
+- [ ] Siapkan migration rehearsal, backup/restore, rollback, dan smoke test.
+- [ ] Buat test harness journey Rawat Jalan BPJS.
+- [ ] Penuhi gate pada [`../KESIAPAN-PRODUCTION.md`](../KESIAPAN-PRODUCTION.md).
 
-- [ ] Transactional outbox per Faskes.
-- [ ] Operation identity/idempotency unique constraint.
-- [ ] Worker lease, batch limit, backoff, max attempts, dan dead-letter.
-- [ ] Attempt history, redaction, reconciliation, dan manual resolution.
-- [ ] Adapter terpisah untuk Antrean Online, VClaim, E-Klaim, dan SATUSEHAT.
+## Exit criteria
 
-## Exit criteria Gate 0
-
-- Satu automated scenario membuktikan finalisasi mengunci seluruh write klinis yang termasuk Slice 1.
-- Dua Faskes tidak dapat mengakses data satu sama lain.
-- Command finansial prioritas aman terhadap retry dan concurrency.
-- Submission eksternal dapat dipulihkan dari timeout, duplikasi, dan worker crash.
-- Error operasional tersedia sebagai worklist, bukan hanya application log.
+- satu deployment hanya membaca dan menulis database instalasinya;
+- policy backend menolak aksi di luar Role/Ruangan/Profesi;
+- state final tidak dapat dimutasi melalui endpoint generik;
+- command uang/stok aman terhadap retry dan concurrency;
+- submission pulih dari timeout, duplikasi, dan worker crash;
+- error operasional tersedia sebagai worklist yang dapat ditindak.

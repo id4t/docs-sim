@@ -1,7 +1,7 @@
 # Workflow — Rawat Jalan BPJS/FKRTL
 
-**Status:** target specification  
-**Tujuan:** membuktikan satu perjalanan pasien end-to-end pada satu Faskes.  
+**Status:** target specification
+**Tujuan:** membuktikan satu perjalanan pasien end-to-end pada satu Faskes.
 **Referensi eksternal terakhir diaudit:** 2026-08-24
 
 ## Aktor
@@ -17,7 +17,7 @@
 
 - Identitas Faskes, kode BPJS/Kemenkes, Organization dan Location SATUSEHAT valid.
 - Mapping poli, DPJP, spesialisasi, kelas, tarif, tindakan, ICD, LOINC/KFA yang dibutuhkan tersedia.
-- User mempunyai membership, Ruangan, dan permission yang sesuai.
+- User mempunyai Role, Profesi, Akses Ruangan, dan permission yang sesuai.
 - Credential serta health check Antrean Online, VClaim, E-Klaim, dan SATUSEHAT dikonfigurasi per environment.
 
 ## Happy path
@@ -42,7 +42,7 @@
 
 ### 3. Pelayanan klinis
 
-1. Kunjungan berpindah `planned/arrived → in-progress` oleh aktor berwenang.
+1. Kunjungan berpindah `waiting → received → in_service` oleh aktor berwenang.
 2. Perawat mencatat asesmen awal/TTV; dokter mencatat anamnesis, pemeriksaan, diagnosis, rencana, dan order.
 3. Unit tujuan menerima order dan mencatat fulfillment/hasil dengan status preliminary/final yang sesuai.
 4. Farmasi melakukan telaah dan dispensing terhadap resep, bukan sekadar mengubah status resep.
@@ -53,7 +53,7 @@
 ### 4. Finalisasi
 
 1. Sistem memeriksa diagnosis, order pending, hasil kritis, resep, resume, cara keluar, dan data wajib lain.
-2. Aktor berwenang melakukan final RM/Kunjungan.
+2. Aktor berwenang melakukan Final Rekam Medis lalu Final Layanan sebagai transisi berbeda.
 3. Backend mengunci mutasi yang tidak sah dan merekam audit event.
 4. Side effect finansial dan interoperabilitas dibuat melalui outbox.
 
@@ -104,7 +104,7 @@
 
 - Automated test untuk happy path dan seluruh failure path prioritas.
 - Trace ID yang menghubungkan request UI, domain event, Submission, dan respons eksternal.
-- Demonstrasi role/permission serta isolasi dua Faskes.
+- Demonstrasi role/permission serta pembatasan Akses Ruangan dalam satu instalasi.
 - Rekonsiliasi total Tagihan, pembayaran, dan hasil grouping.
 - Validasi operasional oleh minimal petugas pendaftaran, klinis, farmasi, kasir, dan casemix.
 

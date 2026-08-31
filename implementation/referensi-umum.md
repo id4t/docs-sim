@@ -2,7 +2,7 @@
 
 **Status:** desain diterima; implementasi berjalan.
 
-Dokumen ini menetapkan katalog referensi bersama per Grup berdasarkan
+Dokumen ini menetapkan katalog referensi instalasi berdasarkan
 `master.jenis_referensi` dan `master.referensi` SIMPel. Database legacy hanya
 menjadi sumber snapshot awal; runtime SIMGOS tidak bergantung kepadanya.
 
@@ -19,14 +19,14 @@ karena lifecycle mapping sistem eksternal berbeda dari katalog internal.
 
 ## Ownership dan schema
 
-Katalog disimpan pada control DB dan dipakai seluruh Faskes dalam satu Grup.
-Tidak ada override per Faskes atau tabel bayangan pada database operasional.
+Katalog disimpan pada database operasional instalasi. Tidak ada control DB,
+override lintas Faskes, atau tabel bayangan kedua.
 
 `reference_types` minimum menyimpan:
 
 - primary key internal;
 - `legacy_id`, nama, singkatan, dan penanda aplikasi SIMPel;
-- `management_scope`: `system` atau `group`;
+- `management_scope`: `system` atau `installation`;
 - status aktif dan version untuk optimistic locking.
 
 `reference_entries` minimum menyimpan:
@@ -47,7 +47,7 @@ Snapshot awal yang diaudit pada 28 Agustus 2026 berisi 337 jenis dan 4.065
 entry; tujuh entry tanpa jenis masuk laporan karantina, bukan data aktif.
 
 Seeder wajib idempotent serta memvalidasi schema, uniqueness, jumlah, dan
-checksum. Deployment boleh meng-upsert kategori `system`; data `group` tidak
+checksum. Deployment boleh meng-upsert kategori `system`; data `installation` tidak
 ditimpa. Pembaruan sumber hanya melalui command yang menghasilkan diff untuk
 review Developer, bukan sinkronisasi runtime.
 
@@ -66,13 +66,12 @@ review Developer, bukan sinkronisasi runtime.
 
 ## Authorization
 
-- `developer` dapat mengakses seluruh fitur dan seluruh Grup/Faskes; akses
-  lintas scope atau data klinis wajib diaudit.
-- `superadmin` dapat mengelola fitur bisnis pada Grupnya, tetapi tidak dapat
-  melewati batas Grup, mengubah kategori `system`, atau memakai fungsi khusus
-  Developer.
+- `developer` dapat mengakses seluruh fitur instalasi; akses data klinis wajib
+  diaudit.
+- `superadmin` dapat mengelola fitur bisnis instalasi, tetapi tidak dapat
+  mengubah kategori `system` atau memakai fungsi khusus Developer.
 - Jenis referensi hanya dibuat Developer. Superadmin mengelola entry kategori
-  `group` yang tercantum dalam allowlist versioned.
+  `installation` yang tercantum dalam allowlist versioned.
 - Akun local/demo menggunakan kredensial seed baku dan wajib mengganti password
   pada login pertama. Production tetap membutuhkan secret environment.
 
@@ -94,4 +93,4 @@ transfusi darah.
 - Form existing tidak memanggil endpoint katalog khusus yang dihapus.
 - Developer dan Superadmin mengikuti scope yang ditetapkan.
 - Password seed wajib diganti sebelum akun membuka fitur lain.
-- `facility:schema-plan` tidak lagi melaporkan sembilan tabel katalog tersebut.
+- tidak ada tabel katalog duplikat pada database instalasi.

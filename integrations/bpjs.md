@@ -1,7 +1,7 @@
 # Integration — BPJS FKRTL
 
-**Status:** VClaim awal terimplementasi per Faskes; capability lain masih target architecture
-**Scope awal:** Rawat Jalan BPJS/FKRTL  
+**Status:** target architecture; kesiapan implementasi diverifikasi terhadap baseline branch senior
+**Scope awal:** Rawat Jalan BPJS/FKRTL
 **Referensi eksternal terakhir diaudit:** 2026-08-24
 
 ## Batas integrasi
@@ -25,7 +25,7 @@ E-Klaim dijelaskan terpisah di [`eklaim.md`](./eklaim.md).
 - External identifier tidak boleh hanya terhubung ke Pasien karena satu Pasien dapat mempunyai banyak episode.
 - Data klinis dan status operasional internal tetap source of truth SIMGOS.
 
-## Konfigurasi per Faskes
+## Konfigurasi instalasi
 
 - kode faskes dan environment;
 - consumer ID/secret, user key, atau credential yang dipersyaratkan;
@@ -34,15 +34,13 @@ E-Klaim dijelaskan terpisah di [`eklaim.md`](./eklaim.md).
 - redaction dan retention request/response;
 - health check, rate limit, serta rotasi credential.
 
-Secret tidak disimpan pada source code atau dikembalikan melalui API frontend.
-
-Kontrak implementasi credential, route, role, failure mode, dan rollout VClaim saat ini dicatat di [`../implementation/integrasi-bpjs-vclaim-per-faskes.md`](../implementation/integrasi-bpjs-vclaim-per-faskes.md).
+Secret disimpan terenkripsi pada database agar dapat dirotasi melalui UI, tidak ditulis pada source code, dan tidak dikembalikan melalui API frontend. Master encryption key tetap berada pada environment server.
 
 ## Operation model
 
 Setiap create/update/cancel eksternal mempunyai:
 
-- Faskes dan environment;
+- instalasi dan environment;
 - operation type dan aggregate internal;
 - idempotency/operation identity;
 - canonical request snapshot dengan data sensitif ter-redaksi untuk tampilan;
