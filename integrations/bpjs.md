@@ -1,6 +1,6 @@
 # Integration — BPJS FKRTL
 
-**Status:** target architecture  
+**Status:** VClaim awal terimplementasi per Faskes; capability lain masih target architecture
 **Scope awal:** Rawat Jalan BPJS/FKRTL  
 **Referensi eksternal terakhir diaudit:** 2026-08-24
 
@@ -35,6 +35,8 @@ E-Klaim dijelaskan terpisah di [`eklaim.md`](./eklaim.md).
 - health check, rate limit, serta rotasi credential.
 
 Secret tidak disimpan pada source code atau dikembalikan melalui API frontend.
+
+Kontrak implementasi credential, route, role, failure mode, dan rollout VClaim saat ini dicatat di [`../implementation/integrasi-bpjs-vclaim-per-faskes.md`](../implementation/integrasi-bpjs-vclaim-per-faskes.md).
 
 ## Operation model
 

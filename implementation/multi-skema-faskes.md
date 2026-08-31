@@ -1,6 +1,6 @@
 # Isolasi Database per Faskes
 
-**Status:** keputusan arsitektur diterima; schema gate, provisioning CLI, dan runtime switch opt-in untuk vertical slice Rawat Jalan sudah teruji.
+**Status:** keputusan arsitektur diterima; schema gate, provisioning CLI, runtime switch, pasien/Pendaftaran, dan VClaim awal sudah teruji lintas database.
 
 Dokumen ini adalah kontrak utama untuk Facility context, kepemilikan data, koneksi database, queue, logging, performa, migrasi, dan backup per Faskes. Proses penambahan Faskes dijelaskan lebih rinci di [`penyiapan-faskes.md`](./penyiapan-faskes.md).
 
@@ -110,6 +110,8 @@ Vertical slice master operasional pada 30 Agustus 2026 telah memindahkan akses U
 
 Vertical slice pasien dan pendaftaran pada 31 Agustus 2026 telah memindahkan pasien beserta kontak, identitas, dan keluarga ke Facility context yang sama dengan Pendaftaran. Tes fisik dua database membuktikan pasien dan nomor pendaftaran dengan ID lokal sama dibaca dari Faskes yang benar, penulisan hanya mengubah database target, dan koneksi kembali ke control DB setelah request.
 
+Vertical slice VClaim awal pada 31 Agustus 2026 telah memindahkan pemeriksaan peserta, SEP, dan Rencana Kontrol aktif ke route ber-Facility context. Kredensial VClaim dienkripsi per Faskes di control DB, sedangkan hasil pemeriksaan dan transaksi tetap berada pada database Faskes. Tes fisik dua database membuktikan request Faskes A dan B memakai `cons_id` berbeda, menulis ke database masing-masing, dan menolak request tanpa kredensial lokal tanpa fallback ke konfigurasi Grup. Detail operasional berada di [`integrasi-bpjs-vclaim-per-faskes.md`](./integrasi-bpjs-vclaim-per-faskes.md).
+
 ## Dampak modul existing
 
 Audit awal menemukan 475 direktori modul, 489 model, dan 538 migrasi. Hampir semua model masih mengandalkan koneksi default, sehingga resolver harus terpusat; menambahkan pemilihan koneksi pada setiap controller akan rawan bocor.
@@ -131,7 +133,7 @@ Jumlah tersebut adalah inventaris awal, bukan status implementasi. Ledger tabel 
 
 ### Hasil audit migrasi 29 Agustus 2026
 
-Validator `php artisan facility:schema-plan` telah mengklasifikasikan 14 modul control dengan 28 migration dan 451 modul facility dengan 508 migration. Tidak ada modul existing yang belum mempunyai owner.
+Validator `php artisan facility:schema-plan` telah mengklasifikasikan 14 modul control dengan 29 migration dan 451 modul facility dengan 508 migration. Tidak ada modul existing yang belum mempunyai owner.
 
 Sebanyak 110 dependency foreign key lintas boundary telah diganti menjadi ID berindeks. Hasil terbaru:
 
@@ -221,6 +223,9 @@ Role operasional biasa selalu membutuhkan Membership yang sesuai. Developer dan 
 - Secret, token, NIK lengkap, payload klinis penuh, dan response mentah tidak masuk log.
 - Submission, remote ID, attempt history, retry state, dan reconciliation berada pada database Faskes karena mengikuti transaksi asal.
 - Interface pembacaan credential dibuat kecil agar secret manager dapat ditambahkan nanti tanpa mengubah workflow; secret manager belum dibutuhkan pada fase awal.
+- Implementasi VClaim saat ini memakai record `bpjs_vclaim` per Faskes. API hanya mengembalikan status dan empat karakter terakhir `cons_id`/`user_key`; `secret_key` tidak pernah dikembalikan.
+- Penggantian parsial diperbolehkan setelah konfigurasi pertama: field kosong dipertahankan, sedangkan konfigurasi pertama wajib lengkap.
+- Endpoint VClaim ber-Facility context tidak boleh memakai credential `.env` sebagai fallback. Endpoint lama tanpa prefix tetap tersedia sementara untuk kompatibilitas dan harus dipensiunkan setelah semua pemanggil dimigrasikan.
 
 ## Logging dan audit
 

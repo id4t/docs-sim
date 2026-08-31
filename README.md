@@ -40,6 +40,7 @@ Dokumen workflow mencantumkan tautan baseline atau kontrak yang relevan. ADR men
 - [`implementation/keanggotaan-dan-akses.md`](./implementation/keanggotaan-dan-akses.md): lapisan kewenangan Faskes–role–Unit Layanan, lifecycle Membership, pemilihan konteks, dan Monitoring Global.
 - [`implementation/multi-skema-faskes.md`](./implementation/multi-skema-faskes.md): keputusan database-per-Faskes, Facility context, ownership data, performa, migrasi, dan acceptance.
 - [`implementation/penyiapan-faskes.md`](./implementation/penyiapan-faskes.md): kontrak draft UI, provisioning/retry CLI, keamanan, status, dan aktivasi Faskes.
+- [`implementation/integrasi-bpjs-vclaim-per-faskes.md`](./implementation/integrasi-bpjs-vclaim-per-faskes.md): credential terenkripsi, route, role, kegagalan, dan rollout VClaim per Faskes.
 - [`workflows/rawat-jalan-bpjs.md`](./workflows/rawat-jalan-bpjs.md): journey operasional pertama beserta failure path.
 - [`integrations/bpjs.md`](./integrations/bpjs.md): batas Antrean Online, VClaim, Aplicares, dan ICare.
 - [`integrations/eklaim.md`](./integrations/eklaim.md): coding, grouping, pengajuan, dispute, dan rekonsiliasi klaim.
