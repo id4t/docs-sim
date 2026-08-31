@@ -187,6 +187,8 @@ Verifikasi 30 Agustus 2026 pada runtime PHP 8.4 lulus 18 tes dengan 101 assertio
 
 Verifikasi terfokus berikutnya lulus 26 tes dengan 70 assertion untuk isolasi dua database pada master pegawai, layanan, dan tarif; akses direktori pegawai ringkas bagi anggota; serta CRUD master bagi Admin Faskes/aktor global. Angka ini adalah suite terfokus terpisah, bukan penjumlahan dengan suite lifecycle di atas.
 
+Verifikasi terfokus 31 Agustus 2026 lulus 21 tes dengan 75 assertion untuk isolasi pasien dan pendaftaran, route binding per Faskes, serta pembatasan pencarian dan mutasi pasien berdasarkan role. Angka ini merupakan suite terpisah dari dua suite sebelumnya.
+
 - Provisioning draft valid menghasilkan tepat satu database.
 - Retry setelah gagal migrasi melanjutkan database yang sama.
 - Dua command bersamaan hanya mengizinkan satu pemegang lock.

@@ -27,12 +27,14 @@ Sudah tersedia:
 - master pegawai, layanan, tarif, dokter, dan departemen medis pada UI aktif memakai route `/f/{facility_code}` dan database Faskes terpilih;
 - anggota Faskes biasa hanya menerima direktori pegawai ringkas untuk kebutuhan operasional, sedangkan data pribadi dan mutasi master dibatasi untuk Admin Faskes/aktor global;
 - tes dua database membuktikan ID pegawai, layanan, dan tarif yang sama tetap membaca nilai Faskes masing-masing serta penulisan tidak menyeberang database.
+- master pasien, kontak, kartu identitas, dan keluarga pada UI pendaftaran memakai route `/f/{facility_code}`; pencarian/ubah pasien dibatasi untuk role Pendaftaran atau Rekam Medis, sedangkan role klinis hanya dapat membuka identitas pasien yang diperlukan alur pelayanan;
+- frontend pendaftaran tidak lagi bergantung pada interceptor URL untuk memilih Faskes: kode Faskes diteruskan eksplisit ke API pasien dan pendaftaran.
 
 Belum termasuk tahap ini:
 
 - konteks Faskes pada queue, scheduler, cache, storage, dan sequence;
 - perluasan enforcement ke modul operasional di luar slice pertama;
-- record level pasien yang belum mempunyai provenance Kunjungan, termasuk alergi;
+- pembatasan record-level pasien berdasarkan provenance Kunjungan untuk role klinis, termasuk alergi;
 - Monitoring Global lintas Faskes.
 - kontraksi endpoint kompatibilitas modul lama setelah seluruh consumer di luar Unit Layanan berpindah ke Facility context.
 

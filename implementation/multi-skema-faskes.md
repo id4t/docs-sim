@@ -108,6 +108,8 @@ Transisi `provisioned | suspended → active` memakai readiness server-side: pro
 
 Vertical slice master operasional pada 30 Agustus 2026 telah memindahkan akses UI pegawai, dokter, departemen medis, layanan, kelas Ruangan, dan tarif ke route ber-Facility context. Tes fisik dua SQLite database membuktikan read/write pegawai, layanan, dan tarif terisolasi walaupun ID lokalnya sama. Model User tetap dipaksa membaca control DB agar relasi akun tidak ikut berpindah saat koneksi Faskes aktif.
 
+Vertical slice pasien dan pendaftaran pada 31 Agustus 2026 telah memindahkan pasien beserta kontak, identitas, dan keluarga ke Facility context yang sama dengan Pendaftaran. Tes fisik dua database membuktikan pasien dan nomor pendaftaran dengan ID lokal sama dibaca dari Faskes yang benar, penulisan hanya mengubah database target, dan koneksi kembali ke control DB setelah request.
+
 ## Dampak modul existing
 
 Audit awal menemukan 475 direktori modul, 489 model, dan 538 migrasi. Hampir semua model masih mengandalkan koneksi default, sehingga resolver harus terpusat; menambahkan pemilihan koneksi pada setiap controller akan rawan bocor.
